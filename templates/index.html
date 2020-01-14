@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> uConnect | We Connect You</title>
-    <link rel="shortcut icon" href="images/favicon.png">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="js/fullPage.js-master/src/fullpage.css">
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'js/fullPage.js-master/src/fullpage.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Ma+Shan+Zheng|Marck+Script|Noto+Sans:700|Roboto|Work+Sans&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5a01f232c4.js" crossorigin="anonymous"></script>
 </head>
@@ -28,7 +29,7 @@
                 <div class="header">
             <!--      LOGO DIV      -->
                     <div class="logo-div">
-                        <a href="index.html"><img src="images/logo.svg" alt="logo" class="logo-image"></a>
+                        <a href="index.html"><img src="{% static 'images/logo.svg' %}" alt="logo" class="logo-image"></a>
                     </div>
             <!--      DIV FOR NAV BAR      -->
                     <div class="nav-div">
@@ -114,7 +115,7 @@
 
                 <div class="home-image">
                     <div class="illustration-home-div">
-                        <img src="images/homeImage.svg" alt="" class="home-illustration">
+                        <img src="{% static 'images/homeImage.svg' %}" alt="" class="home-illustration">
                     </div>
                 </div>
             <!--      HAMBURGER MENU STARTS HERE     -->
@@ -131,7 +132,7 @@
                                 <div class="cross-line-3"></div>
                         </div>
                         <li>
-                            <img src="images/logo.svg" alt="" class="hamburger-logo-img">
+                            <img src="{% static 'images/logo.svg' %}" alt="" class="hamburger-logo-img">
                         </li>
                         <li><a href="#servicesPage">Services</a></li>
                         <li><a href="#blogsPage">Blogs</a></li>
@@ -304,24 +305,24 @@
 
                         <div class="pigeons-illustration-distances">
                             <div class="pig-distances-1">
-                                <img src="images/pigeon.svg" alt="" class="pigeon-image-distances">
+                                <img src="{% static 'images/pigeon.svg' %}" alt="" class="pigeon-image-distances">
                             </div>
                             <div class="pig-distances-2">
-                                <img src="images/pigeon.svg" alt="" class="pigeon-image-distances">
+                                <img src="{% static 'images/pigeon.svg' %}" alt="" class="pigeon-image-distances">
                             </div>
                             <div class="pig-distances-3">
-                                <img src="images/pigeon.svg" alt="" class="pigeon-image-distances">
+                                <img src="{% static 'images/pigeon.svg' %}" alt="" class="pigeon-image-distances">
                             </div>
                             <div class="pig-distances-4">
-                                <img src="images/pigeon.svg" alt="" class="pigeon-image-distances">
+                                <img src="{% static 'images/pigeon.svg' %}" alt="" class="pigeon-image-distances">
                             </div>
                             <div class="pig-distances-5">
-                                <img src="images/pigeon.svg" alt="" class="pigeon-image-distances">
+                                <img src="{% static 'images/pigeon.svg' %}" alt="" class="pigeon-image-distances">
                             </div>
                         </div>
 
                         <div class="tree-illustration-distances">
-                            <img src="images/distanceImage.svg" alt="" class="tree-distances">
+                            <img src="{% static 'images/distanceImage.svg' %}" alt="" class="tree-distances">
                         </div>
 
                     </div>
@@ -349,7 +350,7 @@
 
                     <div class="what-illustration-div">
                         <div class="what-image-div">
-                            <img src="images/whatImage.svg" alt="" class="what-image">
+                            <img src="{% static 'images/whatImage.svg' %}" alt="" class="what-image">
                         </div>
                     </div>
 
@@ -393,24 +394,24 @@
 
                         <div class="pigeons-illustration-community">
                             <div class="pig-community-1">
-                                <img src="images/pigeon.svg" alt="" class="pigeon-image-community">
+                                <img src="{% static 'images/pigeon.svg' %}" alt="" class="pigeon-image-community">
                             </div>
                             <div class="pig-community-2">
-                                <img src="images/pigeon.svg" alt="" class="pigeon-image-community">
+                                <img src="{% static 'images/pigeon.svg' %}" alt="" class="pigeon-image-community">
                             </div>
                             <div class="pig-community-3">
-                                <img src="images/pigeon.svg" alt="" class="pigeon-image-community">
+                                <img src="{% static 'images/pigeon.svg' %}" alt="" class="pigeon-image-community">
                             </div>
                             <div class="pig-community-4">
-                                <img src="images/pigeon.svg" alt="" class="pigeon-image-community">
+                                <img src="{% static 'images/pigeon.svg' %}" alt="" class="pigeon-image-community">
                             </div>
                             <div class="pig-community-5">
-                                <img src="images/pigeon.svg" alt="" class="pigeon-image-community">
+                                <img src="{% static 'images/pigeon.svg' %}" alt="" class="pigeon-image-community">
                             </div>
                         </div>
 
                         <div class="tree-illustration-community">
-                            <img src="images/communityImage.svg" alt="" class="tree-community">
+                            <img src="{% static 'images/communityImage.svg' %}" alt="" class="tree-community">
                         </div>
 
                     </div>
@@ -435,13 +436,13 @@
                         can't find the solution?
                     </div>
                     <div class="services-examples-illustration">
-                        <img src="images/programmer.svg" alt="" class="services-examples-image">
+                        <img src="{% static 'images/programmer.svg' %}" alt="" class="services-examples-image">
                     </div>
                 </div>
 
                 <div class="services-examples-div-2">
                     <div class="services-examples-illustration">
-                        <img src="images/photographer.svg" alt="" class="services-examples-image">
+                        <img src="{% static 'images/photographer.svg' %}" alt="" class="services-examples-image">
                     </div>
                     <div class="services-examples-text">
                         Need a <span class="services-examples-word">PHOTOGRAPHER</span> for
@@ -454,7 +455,7 @@
                         Want someone to help you in your <span class="services-examples-word">ASSIGNMENTS</span>?
                     </div>
                     <div class="services-examples-illustration">
-                        <img src="images/assignment.svg" alt="" class="services-examples-image">
+                        <img src="{% static 'images/assignment.svg' %}" alt="" class="services-examples-image">
                     </div>
                 </div>
                 <div class="join-uconnect-div">
@@ -463,7 +464,7 @@
                     </div>
                     <a href="index.html">
                         <div class="join-uconnect-logo">
-                            <img src="images/logo.svg" alt="logo" class="join-uconnect-image">
+                            <img src="{% static 'images/logo.svg' %}" alt="logo" class="join-uconnect-image">
                         </div>
                     </a>
                 </div>
@@ -499,7 +500,7 @@
 
                 <div class="blog-illustration-div">
                     <div class="blog-illustration">
-                        <img src="images/blogsImage.svg" alt="" class="blog-image">
+                        <img src="{% static 'images/blogsImage.svg' %}" alt="" class="blog-image">
                     </div>
                 </div>
 
@@ -512,7 +513,7 @@
                             <div class="join-text">JOIN</div>
                         </div>
                         <div class="join-illustration">
-                            <img src="images/join.svg" alt="" class="join-image">
+                            <img src="{% static 'images/join.svg' %}" alt="" class="join-image">
                         </div>
                     </div>
 
@@ -521,7 +522,7 @@
                             <div class="join-text">POST</div>
                         </div>
                         <div class="join-illustration">
-                            <img src="images/post.svg" alt="" class="join-image">
+                            <img src="{% static 'images/post.svg' %}" alt="" class="join-image">
                         </div>
                     </div>
 
@@ -530,7 +531,7 @@
                             <div class="join-text">DISCUSS</div>
                         </div>
                         <div class="join-illustration">
-                            <img src="images/discuss.svg" alt="" class="join-image">
+                            <img src="{% static 'images/discuss.svg' %}" alt="" class="join-image">
                         </div>
                     </div>
 
@@ -570,7 +571,7 @@
 
                         <div class="free-services-example-1">
                             <div class="free-services-example-illustration">
-                                <img src="images/phpdeveloper.svg" alt="" class="free-services-image">
+                                <img src="{% static 'images/phpdeveloper.svg' %}" alt="" class="free-services-image">
                             </div>
                             <div class="free-services-example-text">
                                 “I am PHP developer. Connect with me to
@@ -586,7 +587,7 @@
                                 for your upcoming event”
                             </div>
                             <div class="free-services-example-illustration">
-                                <img src="images/photographerIcon.svg" alt="" class="free-services-image">
+                                <img src="{% static 'images/photographerIcon.svg' %}" alt="" class="free-services-image">
                             </div>
                         </div>
 
@@ -594,7 +595,7 @@
 
                         <div class="free-services-example-3">
                             <div class="free-services-example-illustration">
-                                <img src="images/theeta.svg" alt="" class="free-services-image">
+                                <img src="{% static 'images/theeta.svg' %}" alt="" class="free-services-image">
                             </div>
                             <div class="free-services-example-text">
                                 “OHH! I got stucked in assignment. Please Connect with me
@@ -610,7 +611,7 @@
                                 with. Please Connect”
                             </div>
                             <div class="free-services-example-illustration">
-                                <img src="images/singer.svg" alt="" class="free-services-image">
+                                <img src="{% static 'images/singer.svg' %}" alt="" class="free-services-image">
                             </div>
                         </div>
 
@@ -643,7 +644,7 @@
 
                     <div class="services-intro-image-div">
                         <div class="services-intro-image">
-                            <img src="images/servicesImage.svg" alt="" class="services-image">
+                            <img src="{% static 'images/servicesImage.svg' %}" alt="" class="services-image">
                         </div>
                     </div>
 
@@ -689,13 +690,13 @@
                                 event?Connect to discuss” .
                             </div>
                             <div class="paid-services-example-illustration">
-                                <img src="images/shirts.svg" alt="" class="paid-services-image">
+                                <img src="{% static 'images/shirts.svg' %}" alt="" class="paid-services-image">
                             </div>
                         </div>
 
                         <div class="paid-services-example-2">
                             <div class="paid-services-example-illustration">
-                                <img src="images/bike.svg" alt="" class="paid-services-image">
+                                <img src="{% static 'images/bike.svg' %}" alt="" class="paid-services-image">
                             </div>
                             <div class="paid-services-example-text">
                                 “Looking for bikes on rent? i have some for you.
@@ -709,13 +710,13 @@
                                 me and send details”
                             </div>
                             <div class="paid-services-example-illustration">
-                                <img src="images/printing.svg" alt="" class="paid-services-image">
+                                <img src="{% static 'images/printing.svg' %}" alt="" class="paid-services-image">
                             </div>
                         </div>
 
                         <div class="paid-services-example-4">
                             <div class="paid-services-example-illustration">
-                                <img src="images/laptop.svg" alt="" class="paid-services-image">
+                                <img src="{% static 'images/laptop.svg' %}" alt="" class="paid-services-image">
                             </div>
                             <div class="paid-services-example-text">
                                 “Want to sell my laptop. Anyone interested?
@@ -753,7 +754,7 @@
 
                 <div class="about-alif-logo-div">
                     <div class="alif-logo-illustration">
-                        <img src="images/alif.svg" alt="" class="alif-logo-image">
+                        <img src="{% static 'images/alif.svg' %}" alt="" class="alif-logo-image">
                     </div>
                 </div>
 
@@ -787,7 +788,7 @@
 
                         <div class="about-personal-div">
                             <div class="about-picture-div">
-                                <img src="images/fakhar.png" alt="" class="about-image">
+                                <img src="{% static 'images/fakhar.png' %}" alt="" class="about-image">
                             </div>
                             <div class="about-details-div">
                                 <div class="about-name">
@@ -803,7 +804,7 @@
 
                         <div class="about-personal-div">
                             <div class="about-picture-div">
-                                <img src="images/imranist.png" alt="" class="about-image">
+                                <img src="{% static 'images/imranist.png' %}" alt="" class="about-image">
                             </div>
                             <div class="about-details-div">
                                 <div class="about-name">
@@ -819,7 +820,7 @@
 
                         <div class="about-personal-div">
                             <div class="about-picture-div">
-                                <img src="images/hamza.png" alt="" class="about-image">
+                                <img src="{% static 'images/hamza.png' %}" alt="" class="about-image">
                             </div>
                             <div class="about-details-div">
                                 <div class="about-name">
@@ -835,7 +836,7 @@
 
                         <div class="about-personal-div">
                             <div class="about-picture-div">
-                                <img src="images/dawood.png" alt="" class="about-image">
+                                <img src="{% static 'images/dawood.png' %}" alt="" class="about-image">
                             </div>
                             <div class="about-details-div">
                                 <div class="about-name">
@@ -851,7 +852,7 @@
 
                         <div class="about-personal-div">
                             <div class="about-picture-div">
-                                <img src="images/qaisar.png" alt="" class="about-image">
+                                <img src="{% static 'images/qaisar.png' %}" alt="" class="about-image">
                             </div>
                             <div class="about-details-div">
                                 <div class="about-name">
@@ -867,7 +868,7 @@
 
                         <div class="about-personal-div">
                             <div class="about-picture-div">
-                                <img src="images/abdulali.png" alt="" class="about-image">
+                                <img src="{% static 'images/abdulali.png' %}" alt="" class="about-image">
                             </div>
                             <div class="about-details-div">
                                 <div class="about-name">
@@ -883,7 +884,7 @@
 
                         <div class="about-personal-div">
                             <div class="about-picture-div">
-                                <img src="images/ahmed.png" alt="" class="about-image">
+                                <img src="{% static 'images/ahmed.png' %}" alt="" class="about-image">
                             </div>
                             <div class="about-details-div">
                                 <div class="about-name">
@@ -899,7 +900,7 @@
 
                         <div class="about-personal-div">
                             <div class="about-picture-div">
-                                <img src="images/fakhar.png" alt="" class="about-image">
+                                <img src="{% static 'images/fakhar.png' %}" alt="" class="about-image">
                             </div>
                             <div class="about-details-div">
                                 <div class="about-name">
@@ -946,7 +947,7 @@
 
                 <div class="suggestion-form-div">
                     <div class="girl-suggestion-illustration">
-                        <img src="images/suggestFemale.svg" alt="" class="girl-suggestion-image">
+                        <img src="{% static 'images/suggestFemale.svg' %}" alt="" class="girl-suggestion-image">
                     </div>
                     <div class="suggestion-form">
                         <div class="name-input-div">
@@ -962,7 +963,7 @@
                             <button id="sub-button">Submit</button>
                         </div>
                         <div class="boy-suggestion-illustration">
-                            <img src="images/suggestMale.svg" alt="" class="boy-suggestion-image">
+                            <img src="{% static 'images/suggestMale.svg' %}" alt="" class="boy-suggestion-image">
                         </div>
                     </div>
                 </div>
@@ -1035,7 +1036,7 @@
                 
                 <div class="coprights-div">
                     <div class="copyrights">
-                        &copy Copyrights <b> <a href="teamalif.com">TEAM ALIF</a></b>. All Rights Reserved.
+                        &copy Copyrights <b> <a href="https://teamalif.com">TEAM ALIF</a></b>. All Rights Reserved.
                     </div>
                 </div>
 
@@ -1050,8 +1051,8 @@
 <!--                             FULL PAGE DIV ENDS HERE                               -->
 
 
-    <script src="js/fullPage.js-master/src/fullpage.js"></script>
-    <script src="js/app.js"></script>
+    <script src="{% static 'js/fullPage.js-master/src/fullpage.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
 
 
 </body>
