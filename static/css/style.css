@@ -1740,7 +1740,7 @@ body {
     width: 8vw;
     height: 0.6vh;
     background-color: #03C6AF;
-    margin-bottom: 0.8vh;
+    margin-bottom: 0.6vh;
     border-radius: 0.4vh;
     position: static;
 }
@@ -1792,7 +1792,7 @@ body {
 }
 @keyframes hamburger-menu-anim {
     from {
-        right: -80vw;
+        right: -72vw;
     }
     to {
         right: 0vw;
@@ -1807,11 +1807,8 @@ body {
     }
 }
 @keyframes closeMenuAnim {
-    from {
-        right: 0vw;
-    }
     to {
-        right: -80vw;
+        right: -72vw;
     }
 }
             /* HOME PAGE STARTS HERE */
