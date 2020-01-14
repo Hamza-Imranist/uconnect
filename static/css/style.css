@@ -1979,10 +1979,14 @@ body {
     "what-illustration"
     "what-para";
 }
-.what-text {
+.what-text1 {
     font-size: 6vw;
     border-bottom: 0.5vh solid white;
     padding-bottom: 2vh;
+}
+.what-text2 {
+    font-size: 3.2vw;
+    font-weight: bold;
 }
 .what-text::selection {
     background-color: white;
@@ -2067,7 +2071,44 @@ body {
 }
 
             /* WHAT PAGE COMMUNITY SLIDE ENDS HERE  */
-
+            /* SERVICES MAIN EXAMPLES DIV */
+.services-examples-div {
+    padding: 0;
+}
+.services-examples-div-1 , .services-examples-div-2 , .services-examples-div-3 {
+    width: 100vw;
+    height: 28vh;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+}
+.services-examples-div-2 {
+    flex-direction: column;
+}
+.services-examples-text {
+    width: 75vw;
+    font-size: 4vw;
+    height: 6vh;
+}
+.services-examples-word {
+    font-size: 4vw;
+}
+.services-examples-illustration {
+    justify-content: center;
+    height: 20vh;
+}
+.services-examples-image {
+    width: 25vw;
+    height: 25vh;
+}
+.join-uconnect-image {
+    height: 10vh;
+    width: 40vw;
+}
+.join-uconnect-text {
+    font-size: 5vw;
+}
             /* BLOG PAGE STARTS HERE */
 
 .blog-page {
@@ -2093,12 +2134,16 @@ body {
 }
 .word-blog {
     font-size: 6vw;
+    font-weight: bold;
+    position: absolute;
+    left: 27vh;
+    transform: translate(-50%);
 }
 .blog-tag-line {
-    font-size: 4.5vw;
+    font-size: 3.5vw;
 }
 .word-blog-green {
-    font-size: 5.5vw;
+    font-size: 3.5vw;
 }
 .fa-circle {
     font-size: 1.7vw;
@@ -2123,11 +2168,13 @@ body {
 .blog-join-mottos {
     align-items: flex-start;
 }
-.blog-join-div {
-    justify-content: space-around;
+.blog-join-div-1 , .blog-join-div-2 , .blog-join-div-3 {
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
 }
 .join-text-div {
-    width: 10vw;
+    width: 22vw;
     height: 10vh;
 }
 .join-text {
@@ -2136,9 +2183,11 @@ body {
 }
 .join-illustration {
     width: 10vw;
+    height: 10vh;
 }
 .join-image {
     width: 10vw;
+    height: 15vh;
 }
 
             /* BLOG PAGE ENDS HERE */
@@ -2210,30 +2259,7 @@ body {
     font-size: 5.5vw;
 }
 
-            /* SERVICES MAIN EXAMPLES DIV */
-.services-examples-div {
-    justify-content: space-around;
-    padding-bottom: 10vh;
-}
-.services-examples-div-1 , .services-examples-div-2 , .services-examples-div-3 {
-    width: 100vw;
-    height: 10vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.services-examples-text {
-    width: 50vw;
-    font-size: 3vw;
-    height: 4vh;
-}
-.services-examples-word {
-    font-size: 3vw;
-}
-.services-examples-illustration {
-    justify-content: center;
-    height: 9vh;
-}
+
 
             /* SERVICES PAGE ENDS HERE */
 
@@ -2249,7 +2275,6 @@ body {
 .free-services-tag {
     font-size: 7vw;
     width: 15vw;
-    height: 70vh;
 }
 
             /* SECOND DIV CONTAINING EXAMPLES OF FREE SERVICES  */
@@ -2282,7 +2307,6 @@ body {
 .paid-services-tag {
     font-size: 7vw;
     width: 11vw;
-    height: 70vh;
 }
 
             /* SECOND DIV CONTAINING EXAMPLES OF PAID SERVICES  */
@@ -2321,13 +2345,15 @@ body {
 }
 .alif-logo-image {
     width: 50vw;
+    height: 15vh;
 }
 
             /* ABOUT PARA STARTS HERE */
 
 .about-para {
-    width: 90vw;
+    width: 80vw;
     font-size: 3.2vw;
+    display: inline-block;
 }
 
             /* ABOUT MOTTO STARTS HERE */
@@ -2439,6 +2465,7 @@ body {
 .suggestion-form {
     width: 80vw;
     height: 60vh;
+    margin-right: 0;
 }
 #name-input , #email-input {
     width: 50vw;
