@@ -1682,10 +1682,9 @@ body {
     right: -80vw;
     background-color: white;
     display: flex;
-    align-items: center;
     justify-content: space-around;
     flex-direction: column;
-    padding-top: 10vh;
+    padding-top: 2vh;
     -webkit-box-shadow: -9px 7px 9px 0px rgba(230,230,230,1);
     -moz-box-shadow: -9px 7px 9px 0px rgba(230,230,230,1);
     box-shadow: -9px 7px 9px 0px rgba(230,230,230,1);
@@ -1714,18 +1713,18 @@ body {
 }
 .hamburger-nav-links a {
     font-size: 6vw;
-    color: #03C6AF;
+    color: #58595B;
 }
 .hamburger {
     position: fixed;
     right: 5vw;
-    top: 5.5vh;
+    top: 4.6vh;
     z-index: 100;
 }
 .hamburger-line {
     width: 8vw;
     height: 0.6vh;
-    margin-bottom: 0.8vh;
+    margin-bottom: 0.6vh;
     border-radius: 0.4vw;
     background-color: #03C6AF;
     z-index: 100000;
@@ -1733,12 +1732,12 @@ body {
 .cross-button-menu {
     transition: all 0.5s ease-in-out;
     position: absolute;
-    top: -2vh;
+    top: -1vh;
     right: -10vw;
 }
 .cross-line-1 , .cross-line-2 , .cross-line-3 {
     width: 8vw;
-    height: 0.6vh;
+    height: 0.75vh;
     background-color: #03C6AF;
     margin-bottom: 0.6vh;
     border-radius: 0.4vh;
@@ -1761,6 +1760,9 @@ body {
     animation-delay: 2s;
     animation-duration: 1s;
     animation-fill-mode: forwards;
+}
+.hamburger-logo-img {
+    width: 45vw;
 }
 @keyframes rotateCrossLine1 {
     from {
@@ -1813,7 +1815,7 @@ body {
 }
             /* HOME PAGE STARTS HERE */
 .home-page {
-    grid-template-rows: 15vh 40vh 30vh 15vh;
+    grid-template-rows: 12vh 40vh 30vh 18vh;
     grid-template-columns: auto;
     grid-template-areas:
     "header"
@@ -1860,7 +1862,7 @@ body {
 }
 .moto-line {
     width: 72vw;
-    font-size: 6.5vw;
+    font-size: 6.65vw;
 }
 
 .para-div {
@@ -1895,6 +1897,19 @@ body {
 .fa-search {
     color: white;
     font-size: 5vw;
+}
+.get-started-button {
+    padding: 1.5vw;
+    border-radius: 3.2vw;
+    font-size: 6vw;
+    width: 50vw;
+    height: 6vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.get-started-button-div {
+    width: 50vw;
 }
 
             /* HOME PAGE IMAGE */
