@@ -1691,10 +1691,6 @@ body {
     z-index: 1000;
     border-bottom-left-radius: 4vw;
     border-top-left-radius: 4vw;
-    /* animation-name: hamburger-menu-anim;
-    animation-delay: 0.3s;
-    animation-duration: 1.2s;
-    animation-fill-mode: forwards; */
 }
 .hamburger-nav-links li {
     width: 50vw;
