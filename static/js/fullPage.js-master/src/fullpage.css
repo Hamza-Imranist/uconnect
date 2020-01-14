@@ -61,13 +61,13 @@ html.fp-enabled,
     transform: translate3d(0,0,0);
 }
 .fp-controlArrow.fp-prev {
-    left: 45px;
+    left: 35px;
     width: 0;
     border-width: 30.5px 28px 30.5px 0;
     border-color: transparent #58595B transparent transparent;
 }
 .fp-controlArrow.fp-next {
-    right: 45px;
+    right: 35px;
     border-width: 30.5px 0 30.5px 28px;
     border-color: transparent transparent transparent #58595B;
 }

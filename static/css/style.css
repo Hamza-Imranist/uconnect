@@ -1091,13 +1091,15 @@ body {
     align-items: flex-start;
 }
 .services-motto {
-    width: 40vw;
+    width: 30vw;
     font-weight: bold;
     font-size: 2vw;
     text-align: center;
     letter-spacing: 0.4vw;
     line-height: 8vh;
     margin-top: 8vh;
+    margin-right: 4vw;
+    border-bottom: 0.2vh solid rgba(98, 189, 106, 0.849);
 }
 .services-motto-word {
     font-size: 3vw;
@@ -2195,12 +2197,11 @@ body {
 
 .services-page {
     grid-template-columns: 100vw;
-    grid-template-rows: 20vh 20vh 10vh 50vh;
+    grid-template-rows: 25vh 25vh 50vh;
     grid-template-areas:
     "services-text"
-    "services-illustration"
     "services-motto"
-    "services-examples";
+    "services-illustration";
 }
 
             /* SERVICES INTRO TEXT DIV  */
@@ -2212,13 +2213,14 @@ body {
     align-items: center;
     align-content: center;
     position: static;
+    margin-top: 3vh;
 }
 .services-text-para {
-    font-size: 3vw;
+    font-size: 3.5vw;
     letter-spacing: 0.1vw;
     line-height: 6vh;
     width: 90vw;
-    margin-top: 0vh;
+    margin-top: 2vh;
 }
 .services-heading {
     font-weight: bolder;
@@ -2238,23 +2240,30 @@ body {
     align-items: center;
 }
 .services-intro-image {
-    width: 60vw;
-    height: 20vh;
+    width: 80vw;
+    height: 30vh;
     margin-right: 0vw;
 }
 .services-image {
-    width: 60vw;
-    height: 20vh;
+    width: 80vw;
+    height: 30vh;
 }
 
             /* SERVICES MOTTO DIV */
-
+.services-motto-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .services-motto {
-    width: 90vw;
-    font-size: 3.5vw;
+    width: 60vw;
+    font-size: 4.5vw;
+    border-bottom: none;
+    margin-top: 0;
+    margin-right: 0;
 }
 .services-motto-word {
-    font-size: 5.5vw;
+    font-size: 6.5vw;
 }
 
 
