@@ -1684,7 +1684,7 @@ body {
     display: flex;
     justify-content: space-around;
     flex-direction: column;
-    padding-top: 2vh;
+    padding-top: 5vh;
     -webkit-box-shadow: -9px 7px 9px 0px rgba(230,230,230,1);
     -moz-box-shadow: -9px 7px 9px 0px rgba(230,230,230,1);
     box-shadow: -9px 7px 9px 0px rgba(230,230,230,1);
@@ -1714,7 +1714,7 @@ body {
 .hamburger {
     position: fixed;
     right: 5vw;
-    top: 4.6vh;
+    top: 7vh;
     z-index: 100;
 }
 .hamburger-line {
@@ -1728,7 +1728,7 @@ body {
 .cross-button-menu {
     transition: all 0.5s ease-in-out;
     position: absolute;
-    top: -1vh;
+    top: 1.5vh;
     right: -10vw;
 }
 .cross-line-1 , .cross-line-2 , .cross-line-3 {
@@ -1811,7 +1811,7 @@ body {
 }
             /* HOME PAGE STARTS HERE */
 .home-page {
-    grid-template-rows: 12vh 40vh 30vh 18vh;
+    grid-template-rows: 17vh 40vh 30vh 13vh;
     grid-template-columns: auto;
     grid-template-areas:
     "header"
@@ -1874,7 +1874,7 @@ body {
 
 .main-search-div {
     margin-top: 0;
-    width: 50vw;
+    width: 40vw;
 }
 .search-div {
     margin-left: 0vw;
@@ -1897,8 +1897,8 @@ body {
 .get-started-button {
     padding: 1.5vw;
     border-radius: 3.2vw;
-    font-size: 6vw;
-    width: 50vw;
+    font-size: 4vw;
+    width: 40vw;
     height: 6vh;
     display: flex;
     justify-content: center;
@@ -1994,11 +1994,11 @@ body {
 }
 .what-illustration-div {
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
 }
 .what-image-div {
     width: 70vw;
-    height: 40vh;
+    height: 35vh;
     margin-bottom: 0vh;
     margin-right: 0vw;
 }
@@ -2080,7 +2080,7 @@ body {
     height: 28vh;
     display: flex;
     flex-direction: column-reverse;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 .services-examples-div-2 {
@@ -2109,11 +2109,14 @@ body {
 .join-uconnect-text {
     font-size: 5vw;
 }
+.join-uconnect-logo {
+    width: 40vw;
+}
             /* BLOG PAGE STARTS HERE */
 
 .blog-page {
     grid-template-columns: 100vw;
-    grid-template-rows: 50vh 30vh 20vh;
+    grid-template-rows: 40vh 35vh 25vh;
     grid-template-areas:
     "blog-para"
     "blog-illustration"
@@ -2131,12 +2134,13 @@ body {
     font-size: 3.5vw;
     line-height: 4vh;
     padding-top:0vh;
+    height: 40vh;
 }
 .word-blog {
     font-size: 6vw;
     font-weight: bold;
     position: absolute;
-    left: 27vh;
+    left: 50vw;
     transform: translate(-50%);
 }
 .blog-tag-line {
@@ -2150,7 +2154,9 @@ body {
 }
 
             /* SECOND DIV CONTAINING BLOG ILLUSTRATION */
-
+.blog-illustration-div {
+    align-items: flex-end;
+}
 .blog-illustration {
     width: 90vw;
     height: 30vh;
@@ -2166,7 +2172,7 @@ body {
 
             /* LAST DIV CONTAINING MOTTOS OF BLOG */
 .blog-join-mottos {
-    align-items: flex-start;
+    align-items: center;
 }
 .blog-join-div-1 , .blog-join-div-2 , .blog-join-div-3 {
     flex-direction: column-reverse;
@@ -2336,10 +2342,14 @@ body {
 
 
             /* ABOUT PAGE STARTS HERE */
-
+.about-page {
+    grid-template-rows: 10vh 25vh 15vh 10vh 40vh;;
+}
 
             /* ABOUT HEADING STARTS HERE */
-
+.about-header-div {
+    align-items: flex-end;
+}
 .about-header {
     font-size: 6vw;
 
@@ -2458,7 +2468,9 @@ body {
 
 
             /* FIRST DIV CONTAINING HEADING */
-
+.suggestion-text-div {
+    align-items: flex-end;
+}
 .suggestion-text {
     width: 80vw;
     font-size: 3.2vw;

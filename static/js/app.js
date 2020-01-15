@@ -20,7 +20,6 @@ let menuButton = document.querySelector(".hamburger");
 let menu = document.querySelector(".hamburger-nav-links");
 let crossMenuButton = document.querySelector(".cross-button-menu");
 
-
 loginButton.addEventListener("click",displayLoginPage);
 function displayLoginPage(){
     loginPage.style.display = "flex";

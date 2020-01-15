@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    color: #58595B;
+    text-decoration: none;
+}
+body {
+    overflow-x: hidden;
+}
+.login-form-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 100vw;
+    grid-template-rows: 17vh 83vh;
+    grid-template-areas:
+    "header";
+    position: relative;
+}
+.login-form-header-div {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo-div {
+    width: 50vw;
+    height: 15vh;
+}
+.logo-image {
+    width: 45vw;
+    height: 15vh;
+}
+            /* HAMBURGER MENU STARTS HERE */
+.hamburger {
+    position: fixed;
+    right: 77vw;
+    top: 7vh;
+}
+.hamburger-menu {
+    display: block;
+}
+.hamburger-nav-links {
+    position: absolute;
+    height: 65vh;
+    width: 70vw;
+    right: -72vw;
+    top: 0;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    padding-top: 5vh;
+    -webkit-box-shadow: -9px 7px 9px 0px rgba(230,230,230,1);
+    -moz-box-shadow: -9px 7px 9px 0px rgba(230,230,230,1);
+    box-shadow: -9px 7px 9px 0px rgba(230,230,230,1);
+    z-index: 100000;
+    border-bottom-left-radius: 4vw;
+    border-top-left-radius: 4vw;
+}
+.hamburger-nav-links li {
+    width: 50vw;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: navLinksAnim;
+    animation-delay: 1.6s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+.hamburger-nav-links li:hover {
+    color: #62BD69;
+}
+.hamburger-nav-links a {
+    font-size: 6vw;
+    color: #58595B;
+}
+.hamburger-line {
+    width: 8vw;
+    height: 0.6vh;
+    margin-bottom: 0.6vh;
+    border-radius: 0.4vw;
+    background-color: #03C6AF;
+    z-index: 100000;
+}
+.cross-button-menu {
+    position: fixed;
+    top: 1.5vh;
+    right: -10vw;
+}
+.cross-line-1 , .cross-line-2 , .cross-line-3 {
+    width: 8vw;
+    height: 0.75vh;
+    background-color: #03C6AF;
+    margin-bottom: 0.6vh;
+    border-radius: 0.4vh;
+    position: static;
+}
+.cross-line-1 {
+    animation-name: rotateCrossLine1;
+    animation-delay: 2s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+.cross-line-2 {
+    animation-name: hideCrossLine2;
+    animation-delay: 2s;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+.cross-line-3 {
+    animation-name: rotateCrossLine3;
+    animation-delay: 2s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+.hamburger-logo-img {
+    width: 45vw;
+}
+@keyframes rotateCrossLine1 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-45deg);
+        margin-top: 8vh;
+        margin-right: 15vw;
+    }
+}
+@keyframes hideCrossLine2 {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+@keyframes rotateCrossLine3 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(45deg);
+        margin-top: -2.7vh;
+        margin-right: 15vw;
+    }
+}
+@keyframes hamburger-menu-anim {
+    from {
+        right: -72vw;
+    }
+    to {
+        right: 0vw;
+    }
+}
+@keyframes navLinksAnim {
+    from {
+        margin-right: -100vw;
+    }
+    to {
+        margin-right: 0vw;
+    }
+}
+@keyframes closeMenuAnim {
+    to {
+        right: -72vw;
+    }
+}
