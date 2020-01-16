@@ -49,7 +49,7 @@ function displayMenu(){
     backPage.addEventListener("click",()=>{
         menu.style.animation = "closeMenuAnim 1.2s 0.1s forwards";
         backPage.style.display = "none";
-    })
+    });
     crossMenuButton.addEventListener("click",()=>{
         menu.style.animation = "closeMenuAnim 1.2s 0.1s forwards";
         backPage.style.display = "none";
