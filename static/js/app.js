@@ -28,7 +28,7 @@ let menuButton = document.querySelector('.hamburger');
 let menu = document.querySelector('.hamburger-nav-links');
 let crossMenuButton = document.querySelector('.cross-button-menu');
 let alreadyButton = document.querySelector('.signup-already-div');
-console.log(alreadyButton);
+console.log("huuhu");
 console.log("hamza");
 loginButton.addEventListener('click', displayLoginPage);
 function displayLoginPage() {
