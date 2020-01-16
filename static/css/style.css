@@ -2310,6 +2310,7 @@ body {
 .free-services-tag {
     font-size: 7vw;
     width: 15vw;
+    height: 60vh;
 }
 
             /* SECOND DIV CONTAINING EXAMPLES OF FREE SERVICES  */
@@ -2342,6 +2343,7 @@ body {
 .paid-services-tag {
     font-size: 7vw;
     width: 11vw;
+    height: 60vh;
 }
 
             /* SECOND DIV CONTAINING EXAMPLES OF PAID SERVICES  */
@@ -2365,7 +2367,7 @@ body {
 
             /* ABOUT PAGE STARTS HERE */
 .about-page {
-    grid-template-rows: 10vh 25vh 15vh 10vh 40vh;;
+    grid-template-rows: 13vh 25vh 15vh 10vh 37vh;;
 }
 
             /* ABOUT HEADING STARTS HERE */

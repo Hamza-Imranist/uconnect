@@ -6,7 +6,7 @@
     color: #58595B;
     text-decoration: none;
 }
-.login-form-container {
+.signup-form-container {
     width: 100vw;
     height: 100vh;
     background-color: white;
@@ -18,7 +18,7 @@
     position: relative;
     overflow-x: hidden;
 }
-.login-form-header-div {
+.signup-form-header-div {
     grid-area: header;
     display: flex;
     justify-content: space-between;
