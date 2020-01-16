@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,177 @@
     <link rel="stylesheet" href="{% static 'js/fullPage.js-master/src/fullpage.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Ma+Shan+Zheng|Marck+Script|Noto+Sans:700|Roboto|Work+Sans&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5a01f232c4.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            console.log("page loadded")
+            {#/////////////      AJAX LOGIN FORM      //////////////////////#}
+
+            let $invalid = $('.invalid');
+            $invalid.hide();
+            let $myForm = $('#login_form');
+            $myForm.submit(function (event) {
+                event.preventDefault();
+
+
+                {#  Code to submit csrf token with in this post request  #}
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        function getCookie(name) {
+                        var cookieValue = null;
+                        if (document.cookie && document.cookie !== '') {
+                        var cookies = document.cookie.split(';');
+                        for (var i = 0; i < cookies.length; i++) {
+                         var cookie = jQuery.trim(cookies[i]);
+                         // Does this cookie string begin with the name we want?
+                         if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                             cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                             break;
+                         }
+                     }
+                 }
+                 return cookieValue;
+             }
+             if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                 // Only send the token to relative URLs i.e. locally.
+                 xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+             }
+            }
+            });
+
+                {#    AJAX validating the entered credentials  #}
+                $.ajax({
+                    type: "POST",
+                    data: {
+                        username: $('.username').val(),
+                        password: $('.password').val(),
+                        submit: 'login',
+                    },
+                    url:'{% url "Uconnect_app:index" %}',
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.is_valid){
+                            window.location.href = '{% url 'Uconnect_app:index'%}'
+                        }
+                        else{
+                            {#$('.invalid').html("Invalid username/password!");#}
+                            $invalid.show();
+                            $('.password').val('')
+                        }
+                    },
+                    error: function (errorThrown) {
+                        console.log(errorThrown)
+                    },
+                    });
+
+                    });
+
+                    {# Hides the .invalid field when password filed is clicked #}
+                    $('.password').click(function () {
+                        $invalid.hide();
+                     });
+
+
+
+
+                {#  ///////////////////      username validate AJAX       /////////////////   #}
+
+                $('input#signup-username-input').keyup(function () {
+
+                    console.log("in username field")
+                    let validation_output = $('p.signup-username-validation-output');
+                    validation_output.html('');
+                    let $username = $(this).val();
+                    console.log($username);
+
+                    let form = $(this).closest('form');
+                    if ($username !== '' ){                          //only triggered if username field is not empty
+                    $.ajax({
+
+                        url: '{% url 'Uconnect_app:validate_username' %}',
+                        data: form.serialize(),
+                        dataType: 'json',
+                        success: function (data) {
+                            if(data.is_taken){
+                                validation_output.html($username + ' is Taken');
+                                validation_output.css('color', 'red');
+                                {#$('#signup-submit-button').attr('disabled', true);#}      //disables click function
+                                $('button#signup-submit-button').hide();
+                            }
+                            else{
+                                validation_output.html($username + ' is Available');
+                                validation_output.css('color', 'green');
+                                {#$('#signup-submit-button').attr('disabled', false);#}
+                                $('#signup-submit-button').show();
+                            }
+                        },
+                        });
+                    }
+
+                });
+
+                {#///////////////////////////   SIGNUP FORM     /////////////////#}
+
+                let signup_form = $('form#user-form');
+                signup_form.submit(function (e) {
+                    e.preventDefault();
+                    let form_data = signup_form.serialize();
+                    form_data += '&submit=signup';               //To make it go to the 'signup' part of index view, (please look at the index view)
+                    console.log(form_data);
+                    let username_error_field = $('p.js-username-error').html('');
+                    let email_error_field = $('p.js-email-error').html('');
+                    let password_error_field = $('p.js-password-error').html('');
+                    let confirm_password_error_field = $('p.js-confirm-password-error').html('');
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url 'Uconnect_app:index' %}',
+                        dataType: 'json',
+                        data: form_data,
+                        success: function (json) {
+                            if (json.user_created){
+                                window.location.href = '{% url 'Uconnect_app:index'%}';
+                                    console.log("Signup succeeded")
+                            }
+                            else{
+
+                                //although the below logic is noway an efficient one, but nothing else was working for now
+                                //u may change it with Angular8 later
+
+                                if (json.errors.username){
+                                    for(let i=0; i< json.errors.username.length; i++){
+                                    username_error_field.html(json.errors.username[i])
+                                    }
+                                }
+                                if (json.errors.email){
+                                    for(let i=0; i< json.errors.email.length; i++){
+                                    email_error_field.html(json.errors.email[i])
+                                    }
+                                }
+                                if (json.errors.password){
+                                    for(let i=0; i< json.errors.password.length; i++){
+                                    password_error_field.html(json.errors.password[i])
+                                    }
+                                }
+                                if (json.errors.confirm_password){
+                                    for(let i=0; i< json.errors.confirm_password.length; i++){
+                                    confirm_password_error_field.html(json.errors.confirm_password[i])
+                                    }
+                                }
+                            }
+                        }
+                    })
+
+                });
+
+                });
+
+</script>
+
+
 <body>
 
 <!--                             FULL PAGE DIV STARTS HERE                               -->
@@ -29,7 +199,11 @@
                 <div class="header">
             <!--      LOGO DIV      -->
                     <div class="logo-div">
+<<<<<<< HEAD
                         <a href="{% static 'templates/index.html' %}"><img src="{% static 'images/logo.svg' %}" alt="logo" class="logo-image"></a>
+=======
+                        <a href="index.html"><img src="{% static 'images/logo.svg' %}" alt="logo" class="logo-image"></a>
+>>>>>>> djangoIntegration
                     </div>
             <!--      DIV FOR NAV BAR      -->
                     <div class="nav-div">
@@ -222,6 +396,9 @@
 
                 </div>
 
+
+                <form id="user-form" action="{% url 'Uconnect_app:index' %}" method="post">
+                {% csrf_token %}
                 <div class="signup-inputs-div-container">
 
                    <div class="signup-username-div">
@@ -229,7 +406,9 @@
                            <label for="signup-username-input"></label>
                        </div>
                        <div class="signup-username-input">
-                           <input type="text" id="signup-username-input" placeholder="username">
+                           <input type="text" id="signup-username-input" placeholder="username" name="{{ form.username.html_name }}" value="{{ form.username.value|default:'' }}">
+{#                            Username validation result field         #}
+                           <p class="signup-username-validation-output"></p>
                        </div>
                     </div>
 
@@ -267,10 +446,10 @@
                        Already have an account?
                    </div>
                    <div class="signup-submit-button-div">
-                       <button id="signup-submit-button">Signup</button>
+                       <button type="submit" id="signup-submit-button" name="submit" value="signup">Signup</button>
                    </div>
                 </div>
-
+                </form>
             </div>
             
             <!--      BACK PAGE STARTS HERE     -->

@@ -92,7 +92,7 @@ def validate_username(request):
         'is_taken': User.objects.filter(username__iexact=username).exists(),
     }
     # print(data['is_taken'])
-    test = User.objects.filter(username__iexact='Fakhar').exists()
+    # test = User.objects.filter(username__iexact='Fakhar').exists()
     # print(test)
     if data['is_taken']:
         # print("is taken")
