@@ -1,2 +1,6 @@
 .idea/
 __pycache__/
+<<<<<<< HEAD
+=======
+db.sqlite3
+>>>>>>> ad98c529beac1f572b73454f9aca46f4c9fb9293

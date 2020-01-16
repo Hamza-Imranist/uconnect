@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!DOCTYPE html>
 {% load staticfiles %}
 <html lang="en-us">
@@ -924,6 +925,933 @@
     <script src="{% static "js/fullPage.js-master/src/fullpage.js" %}"></script>
     <script src="{% static "js/app.js" %}"></script>
 </body>
+=======
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>uConnect</title>
+    <link rel="shortcut icon" href={% static "images/favicon.png" %}>
+    <link rel="stylesheet" href={% static "css/style.css" %}>
+    <link rel="stylesheet" href={% static "js/fullPage.js-master/src/fullpage.css" %}>
+{#    <link rel="stylesheet" href="{% static "bootstrap/bootstrap.min.css" %}">#}
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Ma+Shan+Zheng|Marck+Script|Noto+Sans:700|Roboto|Work+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5a01f232c4.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        {#/////////////      AJAX LOGIN FORM      //////////////////////#}
+
+        let $invalid = $('.invalid');
+        $invalid.hide();
+        let $myForm = $('#login_form');
+        $myForm.submit(function (event) {
+            event.preventDefault();
+
+
+            {#  Code to submit csrf token with in this post request  #}
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    function getCookie(name) {
+                    var cookieValue = null;
+                    if (document.cookie && document.cookie != '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                     var cookie = jQuery.trim(cookies[i]);
+                     // Does this cookie string begin with the name we want?
+                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                         break;
+                     }
+                 }
+             }
+             return cookieValue;
+         }
+         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+             // Only send the token to relative URLs i.e. locally.
+             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+         }
+        }
+        });
+
+            {#    AJAX validating the entered credentials  #}
+            $.ajax({
+                type: "POST",
+                data: {
+                    username: $('.username').val(),
+                    password: $('.password').val(),
+                    submit: 'login',
+                },
+                url:'{% url "Uconnect_app:index" %}',
+                dataType: 'json',
+                success: function (data) {
+                    if(data.is_valid){
+                        window.location.href = '{% url 'Uconnect_app:index'%}'
+                    }
+                    else{
+                        {#$('.invalid').html("Invalid username/password!");#}
+                        $invalid.show();
+                        $('.password').val('')
+                    }
+                },
+                error: function (errorThrown) {
+                    console.log(errorThrown)
+                },
+                });
+
+                });
+
+                {# Hides the .invalid field when password filed is clicked #}
+                $('.password').click(function () {
+                    $invalid.hide();
+                 });
+
+
+
+
+            {#  ///////////////////      username validate AJAX       /////////////////   #}
+
+            $('.js-validate-username').keyup(function () {
+
+                let validation_output = $('.js-validate-username-output');
+                validation_output.html('');
+                let $username = $(this).val();
+
+                let form = $(this).closest('form');
+                if ($username !== '' ){                          //only triggered if username field is not empty
+                $.ajax({
+
+                    url: '{% url 'Uconnect_app:validate_username' %}',
+                    data: form.serialize(),
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.is_taken){
+                            validation_output.html($username + ' is Taken');
+                            validation_output.css('color', 'red');
+                            {#$('#signup-submit-button').attr('disabled', true);#}      //disables click function
+                            $('#signup-submit-button').hide();
+                        }
+                        else{
+                            validation_output.html($username + ' is Available');
+                            validation_output.css('color', 'green');
+                            {#$('#signup-submit-button').attr('disabled', false);#}
+                            $('#signup-submit-button').show();
+                        }
+                    },
+                    });
+                }
+
+            });
+
+            {#///////////////////////////   SIGNUP FORM     /////////////////#}
+
+            let signup_form = $('form#user-form');
+            signup_form.submit(function (e) {
+                e.preventDefault();
+                let form_data = signup_form.serialize();
+                form_data += '&submit=signup';               //To make it go to the 'signup' part of index view, (please look at the index view)
+                console.log(form_data);
+                let username_error_field = $('p.js-username-error').html('');
+                let email_error_field = $('p.js-email-error').html('');
+                let password_error_field = $('p.js-password-error').html('');
+                let confirm_password_error_field = $('p.js-confirm-password-error').html('');
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url 'Uconnect_app:index' %}',
+                    dataType: 'json',
+                    data: form_data,
+                    success: function (json) {
+                        if (json.user_created){
+                            window.location.href = '{% url 'Uconnect_app:index'%}';
+                                console.log("Signup succeeded")
+                        }
+                        else{
+
+                            //although the below logic is noway an efficient one, but nothing else was working for now
+                            //u may change it with Angular8 later
+
+                            if (json.errors.username){
+                                for(let i=0; i< json.errors.username.length; i++){
+                                username_error_field.html(json.errors.username[i])
+                                }
+                            }
+                            if (json.errors.email){
+                                for(let i=0; i< json.errors.email.length; i++){
+                                email_error_field.html(json.errors.email[i])
+                                }
+                            }
+                            if (json.errors.password){
+                                for(let i=0; i< json.errors.password.length; i++){
+                                password_error_field.html(json.errors.password[i])
+                                }
+                            }
+                            if (json.errors.confirm_password){
+                                for(let i=0; i< json.errors.confirm_password.length; i++){
+                                confirm_password_error_field.html(json.errors.confirm_password[i])
+                                }
+                            }
+                        }
+                    }
+                })
+
+            });
+                
+            });
+
+</script>
+
+<body>
+
+
+    <div id="fullpage">
+        <div class="section">
+            <div class="home-page">
+                <div class="header">
+                    <div class="logo-div">
+                        <a href="{% url 'Uconnect_app:index' %}"><img class="logo-image" alt="logo" src={% static "images/logo.svg" %}></a>
+                    </div>
+
+{#     ////////////////////////////////   NAVBAR    /////////////////////              #}
+
+                    <div class="nav-div">
+                        <div class="navs services-button"><a href="#servicesPage">Services</a> <i class="fas fa-caret-down"></i>
+                            <div class="services-dropdown">
+                                <div class="free-div">  
+                                    <a href="#servicesPage">Free Services</a>
+                                </div>
+                                <div class="line">
+
+                                </div>
+                                <div class="paid-div">
+                                    <a href="#servicesPage">Paid Services</a>
+                                </div>
+                            </div></div>
+                        <div class="navs blogs-nav"><a href="{% url "blog_app:blog_home" %}">Blogs</a></div>
+                        {% if user.is_superuser %}
+                        <div class="navs about-nav"><a href="{% url 'admin:index' %}">Admin</a> </div>
+                        {% else %}
+                        <div class="navs about-nav"><a href="#aboutPage">About Us</a></div>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'Uconnect_app:logout' %}"><div class="logout-button">Logout</div></a>
+                        {% else %}
+                        <div class="navs login-button">Login</div>
+                        <div class="navs signup-button" id="signup-page-display-button">Sign up</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="icons">
+                    <div class="facebook">
+                        <i class="fab fa-facebook-square"></i>
+                    </div>
+                    <div class="twitter">
+                        <i class="fab fa-twitter-square"></i>
+                    </div>
+                    <div class="email">
+                        <i class="fas fa-envelope-square"></i>
+                    </div>
+                </div>
+                <div class="intro-text">
+                    <div class="moto-div">
+                        <div class="moto-line">
+                            WE CONNECT YOU
+                        </div>
+                    </div>
+                    <div class="para-div">
+                        <div class="para-text">
+                            U-connect is a social forum for you to connect with 
+                            your community and solve your multiple problems
+                            <br>on single platform.
+                        </div>
+                    </div>
+                    <div class="main-search-div">
+                        <div class="search-div">
+                            <input type="text" name="searchName" id="searchid" class="search-input" placeholder="e.g. web developer...">
+                        </div>
+                        <div class="search-button">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="home-image">
+                    <div class="illustration-home-div">
+                        <img alt="image" class="home-illustration" src="{% static "images/homeImage.svg" %}">
+                    </div>
+                </div>
+
+
+{#       ///////////////////////////////   LOGIN FORM   ///////////////////////////////         #}
+
+                             <div class="login-form">
+                                 <form action="{% url 'Uconnect_app:index' %}" method="post" id="login_form">
+                                 {% csrf_token %}
+                                 <div class="heading-div">
+                                    <div class="heading">
+                                        LOGIN
+                                    </div>
+                                 </div>
+                                 <div class="inputs-div-container">
+                                    <div class="username-div">
+                                        <div class="username-label">
+                                            <label for="email-username-input">Username or email:</label>
+                                        </div>
+                                        <div class="username-input">
+                                            <input type="text" class="username" id="email-username-input" placeholder="email/username" name="username">
+                                        </div>
+                                     </div>
+                                     <div class="password-div">
+                                        <div class="password-label">
+                                            <label for="password-input">Password:</label>
+                                        </div>
+                                        <div class="password-input">
+                                            <input type="password"  class="password" id="password-input" placeholder="password" name="password">
+                                        </div>
+                                     </div>
+                                     <p class="invalid">Invalid username/password</p>
+                                 </div>
+                                 <div class="button-div">
+                                    <div class="forgot-div">
+                                        Forgot your password?
+                                    </div>
+                                    <div class="submit-button-div">
+                                        <button id="login-submit-button" type="submit" name="submit" value="login">Login</button>
+                                    </div>
+                                 </div>
+                                 </form>
+                             </div>
+
+
+
+
+                {#  /////////////////////////////         SignUp form      ///////////////////////////// #}
+
+                            <div class="signup-form">
+                                     <form action="{% url 'Uconnect_app:index' %}" method="post" id="user-form">
+                                     {% csrf_token %}
+                                    <div class="signup-heading-div">
+                                       <div class="signup-heading-facebook">
+                                           <div class="facebook-icon-signup">
+                                            <i class="fab fa-facebook-f"></i>
+                                           </div>
+                                           <div class="facebook-email-signup">
+                                                Signup with facebook
+                                           </div>
+                                       </div>
+                                       <div class="signup-heading-google">
+                                           <div class="google-icon-signup">
+                                            <i class="fab fa-google-plus-g"></i>
+                                           </div>
+                                           <div class="google-email-signup">
+                                            Signup with google
+                                           </div>
+                                    </div>
+                                    </div>
+                                    <div class="signup-inputs-div-container">
+                                       <div class="signup-username-div">
+                                           <div class="signup-username-label">
+                                               <p class="js-validate-username-output"></p>
+                                               <label for="signup-username-input">Username</label>
+                                           </div>
+                                           <div class="signup-username-input">
+                                               <input type="text" id="signup-username-input" class="js-validate-username" placeholder="username" name="{{ form.username.html_name }}" value="{{ form.username.value|default:'' }}">
+                                              <p class="alert alert-danger js-username-error" role="alert"></p>
+                                           </div>
+                                        </div>
+                                        <div class="signup-username-div">
+                                            <div class="signup-username-label">
+                                                <label for="signup-email-input">Email</label>
+                                            </div>
+                                            <div class="signup-username-input">
+                                                <input type="text" id="signup-email-input" name="{{ form.email.html_name }}" placeholder="email" value="{{ form.email.value|default:'' }}">
+                                                <p class="alert alert-danger js-email-error" role="alert"></p>
+                                            </div>
+                                         </div>
+                                        <div class="signup-password-div">
+                                           <div class="signup-password-label">
+                                               <label for="signup-password-input">Password:</label>
+                                           </div>
+                                           <div class="signup-password-input">
+                                               <input type="password" id="signup-password-input" name="{{ form.password.html_name }}" placeholder="password" value="{{ form.password.value|default:'' }}">
+                                                <p class="alert alert-danger js-password-error" role="alert"></p>
+                                           </div>
+                                        </div>
+                                        <div class="signup-password-div">
+                                            <div class="signup-password-label">
+                                                <label for="signup-confirm-password-input">Confirm Password:</label>
+                                            </div>
+                                            <div class="signup-password-input">
+                                                <input type="password" id="signup-confirm-password-input" name="{{ form.confirm_password.html_name }}" placeholder="confirm password" value="{{ form.confirm_password.value|default:'' }}">
+                                                <p class="alert alert-danger js-confirm-password-error" role="alert"></p>
+                                            </div>
+                                         </div>
+{#                                        {{ form.as_p }}#}
+                                    </div>
+                                    <div class="signup-button-div">
+                                       <div class="already-div">
+                                           Already have an account?
+                                       </div>
+                                       <div class="signup-submit-button-div">
+                                           <button id="signup-submit-button"  type="submit" name="submit" value="signup">Signup</button>
+                                       </div>
+                                    </div>
+                                     </form>
+                            </div>
+
+                             <div class="back-page">
+
+                             </div>   
+            </div>
+        </div>
+        <div class="section">
+            <div class="slide horizontal-scrolling">
+                <div class="what-page2-option1">
+                    <div class="distances-text-div">
+                        <div class="distances-text">
+                            OUR AIM <br> IS TO <br> <span class="word-lessen">LESSEN</span> <br> THE <br> <span class="word-distances">DISTANCES</span>
+                        </div>
+                    </div>
+                    <div class="distances-illustration-div">
+                        <div class="pigeons-illustration-one">
+                            <div class="pig-one1">
+                                <img alt="" class="pigeon-image" src={% static "images/pigeon.svg" %}>
+                            </div>
+                            <div class="pig-one2">
+                                <img alt="" class="pigeon-image" src={% static "images/pigeon.svg" %}>
+                            </div>
+                            <div class="pig-one3">
+                                <img alt="" class="pigeon-image" src={% static "images/pigeon.svg" %}>
+                            </div>
+                            <div class="pig-one4">
+                                <img alt="" class="pigeon-image" src={% static "images/pigeon.svg" %}>
+                            </div>
+                            <div class="pig-one5">
+                                <img alt="" class="pigeon-image" src={% static "images/pigeon.svg" %}>
+                            </div>
+                        </div>
+                        <div class="tree-illustration-one">
+                            <img alt="" class="tree-one" src={% static "images/distanceImage.svg" %}>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide horizontal-scrolling active">
+                <div class="what-page1">
+                    <div class="what-text-div">
+                        <div class="what-text">WHAT IS U-CONNECT?</div>
+                    </div>
+                    <div class="what-illustration-div">
+                        <div class="what-image-div">
+                            <img alt="" class="what-image" src={% static "images/whatImage.svg" %}>
+                        </div>
+                    </div>
+                    <div class="what-para-div">
+                        <div class="what-para-text">
+                            <span class="word-white">U-CONNECT</span> is a web-based <br> 
+                            <span class="word-white">Social Platform</span> for students <br> 
+                            of <span class="word-white">UET Taxila</span> where everyone <br>
+                            can put forward his/her concerns <br> 
+                            regarding <span class="word-white">Services</span> provided in the <br>
+                            campus.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide horizontal-scrolling">
+                <div class="what-page2-option2">
+                    <div class="distances-text-div">
+                        <div class="distances-text">
+                            LET US<br><span class="word-help">HELP</span><br>TO<br>CONNECT <br> YOU <br> WITH <br> YOUR <br> <span class="word-community">COMMUNITY</span>
+                        </div>
+                    </div>
+                    <div class="distances-illustration-div">
+                        <div class="pigeons-illustration-one">
+                            <div class="pig-one1">
+                                <img  alt="" class="pigeon-image" src={% static "images/pigeon.svg" %}>
+                            </div>
+                            <div class="pig-one2">
+                                <img alt="" class="pigeon-image" src={% static "images/pigeon.svg" %}>
+                            </div>
+                            <div class="pig-one3">
+                                <img alt="" class="pigeon-image" src={% static "images/pigeon.svg" %}>
+                            </div>
+                            <div class="pig-one4">
+                                <img alt="" class="pigeon-image" src={% static "images/pigeon.svg" %}>
+                            </div>
+                            <div class="pig-one5">
+                                <img alt="" class="pigeon-image" src={% static "images/pigeon.svg" %}>
+                            </div>
+                        </div>
+                        <div class="tree-illustration-one">
+                            <img alt="" class="tree-one" src={% static "images/communityImage.svg" %}>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="blog-page">
+                <div class="blog-para-div">
+                    <div class="blog-para">
+                        <span class="word-blog">BLOGS</span> <br> <br>
+                        <span class="word-blog-green">U-CONNECT</span>
+                        brings all the uetians on a single platform 
+                        to share and discuss something that means to everyone. <br>
+                        <span class="blog-tag-line">Every Uetian is welcome to:</span> <br>
+                        <i class="fas fa-circle"></i> Share his concerns regarding campus. <br>
+                        <i class="fas fa-circle"></i> Share his experiences within campus. <br>
+                        <i class="fas fa-circle"></i> Promote an upcoming Event. <br>
+                        <i class="fas fa-circle"></i> Promote his/her interests and knowledge. <br>
+                    </div>
+                </div>
+                <div class="blog-illustration-div">
+                    <div class="blog-illustration">
+                        <img  alt="" class="blog-image" src={% static "images/blogsImage.svg" %}>
+                    </div>
+                </div>
+                <div class="blog-join-mottos">
+                    <div class="blog-join-div">
+                        <div class="join-text-div">
+                            <div class="join-text">JOIN</div>
+                        </div>
+                        <div class="join-illustration">
+                            <img  alt="" class="join-image" src={% static "images/join.svg" %}>
+                        </div>
+                    </div>
+                    <div class="blog-join-div">
+                        <div class="join-text-div">
+                            <div class="join-text">POST</div>
+                        </div>
+                        <div class="join-illustration">
+                            <img  alt="" class="join-image" src={% static "images/post.svg" %}>
+                        </div>
+                    </div>
+                    <div class="blog-join-div">
+                        <div class="join-text-div">
+                            <div class="join-text">DISCUSS</div>
+                        </div>
+                        <div class="join-illustration">
+                            <img  alt="" class="join-image" src={% static "images/discuss.svg" %}>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="slide horizontal-scrolling">
+                <div class="free-services-page">
+                    <div class="free-services-tag-div">
+                        <div class="free-services-tag"> 
+                            FREE SERVICES
+                        </div>
+                    </div>
+                    <div class="free-services-examples-div">
+                        <div class="free-services-example-1">
+                            <div class="free-services-example-illustration">
+                                <img  alt="" class="free-services-image" src={% static "images/phpdeveloper.svg" %}>
+                            </div>
+                            <div class="free-services-example-text">
+                                “I am PHP developer. Connect with me to
+                                solve your problems”
+                            </div>
+                        </div>
+                        <div class="free-services-example-2">
+                            <div class="free-services-example-text">
+                                “Hey there! I am photographer. Connect with me to hire
+                                for your upcoming event”
+                            </div>
+                            <div class="free-services-example-illustration">
+                                <img  alt="" class="free-services-image" src={% static "images/photographerIcon.svg" %}>
+                            </div>
+                        </div>
+                        <div class="free-services-example-3">
+                            <div class="free-services-example-illustration">
+                                <img alt="" class="free-services-image" src={% static "images/theeta.svg" %}>
+                            </div>
+                            <div class="free-services-example-text">
+                                “OHH! I got stucked in assignment. Please Connect with me
+                                to help in solving this problem”
+                            </div>
+                        </div>
+                        <div class="free-services-example-4">
+                            <div class="free-services-example-text">
+                                “Singer here! Need a guitarist friend to collaborate
+                                with. Please Connect”
+                            </div>
+                            <div class="free-services-example-illustration">
+                                <img  alt="" class="free-services-image" src={% static "images/singer.svg" %}>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide horizontal-scrolling active">
+                <div class="services-page">
+                    <div class="services-intro-div">
+                        <div class="services-intro-text">
+                            <div class="services-heading">SERVICES</div>
+                            <div class="services-text-para"><span class="word-blog-green">U-Connect</span> provides everything being provided in campus to 
+                                serve you.</div>
+                        </div>
+                    </div>
+                    <div class="services-intro-image-div">
+                        <div class="services-intro-image">
+                            <img  alt="" class="services-image" src={% static "images/servicesImage.svg" %}>
+                        </div>
+                    </div>
+                    <div class="services-motto-div">
+                        <div class="services-motto">
+                            WE <span class="services-motto-word">CONNECT</span> YOU TO <span class="services-motto-word">SERVE</span> YOU
+                        </div>
+                    </div>
+                    <div class="services-examples-div">
+                        <div class="services-examples-div-1">
+                            <div class="services-examples-text">
+                                Stuck in <span class="services-examples-word">PROGRAMMING</span>,
+                                can't find the solution?
+                            </div>
+                            <div class="services-examples-illustration">
+                                <img  alt="" class="services-examples-image" src={% static "images/programmer.svg" %}>
+                            </div>
+                        </div>
+                        <div class="services-examples-div-2">
+                            <div class="services-examples-text">
+                                Need a <span class="services-examples-word">PHOTOGRAPHER</span> for
+                                an upcoming event?
+                            </div>
+                            <div class="services-examples-illustration">
+                                <img  alt="" class="services-examples-image" src={% static "images/photographer.svg" %}>
+                            </div>
+                        </div>
+                        <div class="services-examples-div-3">
+                            <div class="services-examples-text">
+                                Want someone to help you in your<span class="services-examples-word">ASSIGNMENTS</span>?
+                            </div>
+                            <div class="services-examples-illustration">
+                                <img  alt="" class="services-examples-image" src={% static "images/assignment.svg" %}>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </div>
+            <div class="slide horizontal-scrolling">
+                <div class="paid-services-page">
+                    <div class="paid-services-tag-div">
+                        <div class="paid-services-tag"> 
+                            PAID SERVICES
+                        </div>
+                    </div>
+                    <div class="paid-services-examples-div">
+                        <div class="paid-services-example-1">
+                            <div class="paid-services-example-text">
+                                “Want any customized T-shirts/Hoddies for your 
+                                event?Connect to discuss” .
+                            </div>
+                            <div class="paid-services-example-illustration">
+                                <img  alt="" class="paid-services-image" src={% static "images/shirts.svg" %}>
+                            </div>
+                        </div>
+                        <div class="paid-services-example-2">
+                            <div class="paid-services-example-illustration">
+                                <img  alt="" class="paid-services-image" src={% static "images/bike.svg" %}>
+                            </div>
+                            <div class="paid-services-example-text">
+                                “Looking for bikes on rent? i have some for you.
+                                Connect for more details”
+                            </div>
+                        </div>
+                        <div class="paid-services-example-3">
+                            <div class="paid-services-example-text">
+                                “Got my printing services for you. Connect with
+                                me and send details”
+                            </div>
+                            <div class="paid-services-example-illustration">
+                                <img  alt="" class="paid-services-image" src={% static "images/printing.svg" %}>
+                            </div>
+                        </div>
+                        <div class="paid-services-example-4">
+                            <div class="paid-services-example-illustration">
+                                <img src="{% static "images/laptop.svg" %}" alt="" class="paid-services-image">
+                            </div>
+                            <div class="paid-services-example-text">
+                                “Want to sell my laptop. Anyone interested?
+                                Feel free to contact”
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="about-page" id="about">
+                <div class="about-header-div">
+                    <div class="about-header">
+                        ABOUT US
+                    </div>
+                </div>
+                <div class="about-alif-logo-div">
+                    <div class="alif-logo-illustration">
+                        <img src="{% static "images/alif.svg" %}" alt="" class="alif-logo-image">
+                    </div>
+                </div>
+                <div class="about-para-div">
+                    <div class="about-para">
+                        “U-CONNECT is a project by ‘TEAM ALIF’. Our aim is to provide a specific  
+                        social platform for the students of UET Taxila to connect with each other.”
+                    </div>
+                </div>
+                <div class="about-motto-div">
+                    <div class="about-motto">
+                        <span class="about-motto-blue">IN</span>&nbsp&nbsp
+                        <span class="about-motto-black">CONNECTIONS</span>&nbsp&nbsp
+                        <span class="about-motto-blue">WE</span>&nbsp&nbsp
+                        <span class="about-motto-black">BELIEVE</span>
+                    </div>
+                </div>
+                <div class="about-slider-div">
+                    <div class="about-slider">
+                        <div class="about-personal-div about-personal-div-1">
+                            <div class="about-picture-div">
+                                <img src="{% static "images/fakhar.svg" %}" alt="" class="about-image">
+                            </div>
+                            <div class="about-details-div">
+                                <div class="about-name">
+                                    Fakhar Mehmood
+                                </div>
+                                <div class="about-profession">
+                                    Web Developer
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-personal-div about-personal-div-2">
+                            <div class="about-picture-div">
+                                <img src="{% static "images/imranist.svg" %}" alt="" class="about-image">
+                            </div>
+                            <div class="about-details-div">
+                                <div class="about-name">
+                                    Hamza Abbas
+                                </div>
+                                <div class="about-profession">
+                                    Web Developer
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-personal-div about-personal-div-3">
+                            <div class="about-picture-div">
+                                <img src="{% static "images/hamza.svg" %}" alt="" class="about-image">
+                            </div>
+                            <div class="about-details-div">
+                                <div class="about-name">
+                                    Hamza Bilal
+                                </div>
+                                <div class="about-profession">
+                                    UI/UX Designer
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-personal-div about-personal-div-4">
+                            <div class="about-picture-div">
+                                <img src="{% static "images/dawood.svg" %}" alt="" class="about-image">
+                            </div>
+                            <div class="about-details-div">
+                                <div class="about-name">
+                                    Dawood Iqbal
+                                </div>
+                                <div class="about-profession">
+                                    Graphics Designer
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-personal-div about-personal-div-5">
+                            <div class="about-picture-div">
+                                <img src="{% static "images/qaisar.svg" %}" alt="" class="about-image">
+                            </div>
+                            <div class="about-details-div">
+                                <div class="about-name">
+                                    Qaisar Khan
+                                </div>
+                                <div class="about-profession">
+                                    Front End Developer
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-personal-div about-personal-div-6">
+                            <div class="about-picture-div">
+                                <img src="{% static "images/abdulali.svg" %}" alt="" class="about-image">
+                            </div>
+                            <div class="about-details-div">
+                                <div class="about-name">
+                                    Abdul Ali
+                                </div>
+                                <div class="about-profession">
+                                    Front End Developer
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-personal-div about-personal-div-7">
+                            <div class="about-picture-div">
+                                <img src="{% static "images/ahmed.svg" %}" alt="" class="about-image">
+                            </div>
+                            <div class="about-details-div">
+                                <div class="about-name">
+                                    Ahmed Jahanghir
+                                </div>
+                                <div class="about-profession">
+                                    UI/UX Designer
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-personal-div about-personal-div-1">
+                            <div class="about-picture-div">
+                                <img src="{% static "images/fakhar.svg" %}" alt="" class="about-image">
+                            </div>
+                            <div class="about-details-div">
+                                <div class="about-name">
+                                    Fakhar Mehmood
+                                </div>
+                                <div class="about-profession">
+                                    Web Developer
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-personal-div about-personal-div-2">
+                            <div class="about-picture-div">
+                                <img src="{% static "images/imranist.svg" %}" alt="" class="about-image">
+                            </div>
+                            <div class="about-details-div">
+                                <div class="about-name">
+                                    Hamza Abbas
+                                </div>
+                                <div class="about-profession">
+                                    Web Developer
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-personal-div about-personal-div-3">
+                            <div class="about-picture-div">
+                                <img src="{% static "images/hamza.svg" %}" alt="" class="about-image">
+                            </div>
+                            <div class="about-details-div">
+                                <div class="about-name">
+                                    Hamza Bilal
+                                </div>
+                                <div class="about-profession">
+                                    UI/UX Designer
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-personal-div about-personal-div-4">
+                            <div class="about-picture-div">
+                                <img src="{% static "images/dawood.svg" %}" alt="" class="about-image">
+                            </div>
+                            <div class="about-details-div">
+                                <div class="about-name">
+                                    Dawood Iqbal
+                                </div>
+                                <div class="about-profession">
+                                    Graphics Designer
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="suggestion-page">
+                <div class="suggestion-text-div">
+                    <div class="suggestion-text">
+                        Provide us with your valuable <span class="suggestion-word-blue">SUGGESTIONS</span> and
+                        <span class="suggestion-word-blue">IDEAS</span> to make it <span class="suggestion-word-blue">BEST</span> for you.
+                    </div>
+                </div>
+                <div class="suggestion-form-div">
+                    <div class="girl-suggestion-illustration">
+                        <img src="{% static "images/suggestFemale.svg" %}" alt="" class="girl-suggestion-image">
+                    </div>
+                    <div class="suggestion-form">
+                        <div class="name-input-div">
+                            <input type="text" id="name-input" placeholder="Name...">
+                        </div>
+                        <div class="email-input-div">
+                            <input type="email" id="email-input" placeholder="Email...">
+                        </div>
+                        <div class="suggestion-input-div">
+                            <textarea id="textarea-input" cols="30" rows="10" placeholder="Suggestion..."></textarea>
+                        </div>
+                        <div class="submit-button-div">
+                            <button id="sub-button">Submit</button>
+                        </div>
+                        <div class="boy-suggestion-illustration">
+                            <img src="{% static "images/suggestMale.svg" %}" alt="" class="boy-suggestion-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section fp-auto-height">
+            <div class="footer-container">
+                <div class="uconnect-details-div">
+                    <div class="uconnect-details">
+                        <div class="uconnect-detail-1">
+                            <a href="#homePage">Home</a>
+                        </div>
+                        <div class="uconnect-detail-1">
+                            <a href="#blogsPage">Blogs</a>
+                        </div>
+                        <div class="uconnect-detail-1">
+                            <a href="#servicesPage">Services</a>
+                        </div>
+                        <div class="uconnect-detail-1">
+                            <a href="#aboutPage">About</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-details-div">
+                    <div class="uconnect-details">
+                        <div class="uconnect-detail-2 email-details">
+                            <i class="fas fa-envelope"></i>&nbsp&nbspinfo@teamalif.com
+                        </div>
+                        <div class="uconnect-detail-2 number-details">
+                            <i class="fas fa-phone"></i>&nbsp&nbsp+92311-7612904
+                        </div>
+                        <div class="uconnect-detail-2 website-details">
+                            <i class="fas fa-globe"></i>&nbsp&nbspwww.teamalif.com
+                        </div>
+                    </div>
+                </div>
+                <div class="developer-details-div">
+                    <div class="uconnect-details">
+                        <div class="uconnect-detail-2">
+                            <i class="fab fa-facebook-square" id="fb-icon"></i>
+                        </div>
+                        <div class="uconnect-detail-2">
+                            <i class="fab fa-twitter-square" id="t-icon"></i>
+                        </div>
+                        <div class="uconnect-detail-2">
+                            <i class="fab fa-linkedin" id="l-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="coprights-div">
+                    <div class="copyrights">
+                        &copy Copyright <b> <a href="https://teamalif.com">TEAM ALIF</a></b>. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static "js/fullPage.js-master/src/fullpage.js" %}"></script>
+    <script src="{% static "js/app.js" %}"></script>
+</body>
+>>>>>>> ad98c529beac1f572b73454f9aca46f4c9fb9293
 =======
 <!DOCTYPE html>
 {% load staticfiles %}
