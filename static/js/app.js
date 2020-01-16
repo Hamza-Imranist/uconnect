@@ -64,8 +64,23 @@ function displayMenu() {
 	});
 }
 
+<<<<<<< HEAD
 alreadyButton.addEventListener('click', displayLoginOnAlready);
 function displayLoginOnAlready() {
 	signupPage.style.display = 'none';
 	loginPage.style.display = 'flex';
+=======
+menuButton.addEventListener("click",displayMenu);
+function displayMenu(){
+    menu.style.animation = "hamburger-menu-anim 1.2s 0.3s forwards";
+    backPage.style.display = "block";
+    backPage.addEventListener("click",()=>{
+        menu.style.animation = "closeMenuAnim 1.2s 0.1s forwards";
+        backPage.style.display = "none";
+    });
+    crossMenuButton.addEventListener("click",()=>{
+        menu.style.animation = "closeMenuAnim 1.2s 0.1s forwards";
+        backPage.style.display = "none";
+    })
+>>>>>>> djangoIntegration
 }
