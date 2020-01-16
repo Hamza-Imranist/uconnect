@@ -379,7 +379,26 @@ body {
     display: flex;
     justify-content: space-between;
 }
+.login-forgot-div-container {
+    width: 25vw;
+    height: 6vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-forgot-div {
+    font-size: 1vw;
+    width: 20vw;
+}
 .login-forgot-div:hover {
+    color:rgb(6, 173, 154);
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+.dont-have-div {
+    font-size: 1vw;
+}
+.dont-have-div:hover {
     color:rgb(6, 173, 154);
     cursor: pointer;
     transition: all 0.5s ease-in-out;
@@ -558,9 +577,12 @@ body {
     cursor: pointer;
 }
 .signup-button-div {
-    width: 21vw;
+    width: 20vw;
     display: flex;
     justify-content: space-between;
+}
+.signup-already-div {
+    font-size: 1vw;
 }
 .signup-already-div:hover {
     color: rgb(6, 173, 154);

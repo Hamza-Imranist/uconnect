@@ -28,8 +28,8 @@ let menuButton = document.querySelector('.hamburger');
 let menu = document.querySelector('.hamburger-nav-links');
 let crossMenuButton = document.querySelector('.cross-button-menu');
 let alreadyButton = document.querySelector('.signup-already-div');
-console.log("huuhu");
-console.log("hamza");
+let dontHaveButton = document.querySelector(".dont-have-div");
+
 loginButton.addEventListener('click', displayLoginPage);
 function displayLoginPage() {
 	loginPage.style.display = 'flex';
@@ -67,5 +67,19 @@ function displayMenu() {
 alreadyButton.addEventListener('click', displayLoginOnAlready);
 function displayLoginOnAlready() {
 	signupPage.style.display = 'none';
-	loginPage.style.display = 'flex';
+    loginPage.style.display = 'flex';
+    backPage.addEventListener('click', () => {
+		loginPage.style.display = 'none';
+		backPage.style.display = 'none';
+	});
+}
+
+dontHaveButton.addEventListener("click",displaySignupOnDontHave);
+function displaySignupOnDontHave(){
+    signupPage.style.display = 'flex';
+    loginPage.style.display = 'none';
+    backPage.addEventListener('click', () => {
+		signupPage.style.display = 'none';
+		backPage.style.display = 'none';
+	});
 }
