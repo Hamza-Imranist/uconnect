@@ -29,6 +29,12 @@ let menu = document.querySelector('.hamburger-nav-links');
 let crossMenuButton = document.querySelector('.cross-button-menu');
 let alreadyButton = document.querySelector('.signup-already-div');
 let dontHaveButton = document.querySelector(".dont-have-div");
+let eyeToggle = document.querySelector(".toggle-password");
+let passwordInput = document.querySelector("#login-password-input");
+let eyeToggle1 = document.querySelector(".toggle-password-1");
+let eyeToggle2 = document.querySelector(".toggle-password-2");
+let signupPasswordInput = document.querySelector("#signup-password-input");
+let confirmPasswordInput = document.querySelector("#signup-confirm-password-input");
 
 loginButton.addEventListener('click', displayLoginPage);
 function displayLoginPage() {
@@ -82,4 +88,37 @@ function displaySignupOnDontHave(){
 		signupPage.style.display = 'none';
 		backPage.style.display = 'none';
 	});
+}
+
+eyeToggle.addEventListener("click",showPassword);
+function showPassword(){
+    eyeToggle.classList.toggle("fa-eye-slash");
+    if ( passwordInput.type === "text" ){
+        passwordInput.type = "password" ;
+    }
+    else {
+        passwordInput.type = "text" ;
+    }
+}
+
+eyeToggle1.addEventListener("click",showSignupPassword);
+function showSignupPassword(){
+    eyeToggle1.classList.toggle("fa-eye-slash");
+    if ( signupPasswordInput.type === "text" ){
+        signupPasswordInput.type = "password" ;
+    }
+    else {
+        signupPasswordInput.type = "text" ;
+    }
+}
+
+eyeToggle2.addEventListener("click",showConfirmPassword);
+function showConfirmPassword(){
+    eyeToggle2.classList.toggle("fa-eye-slash");
+    if ( confirmPasswordInput.type === "text" ){
+        confirmPasswordInput.type = "password" ;
+    }
+    else {
+        confirmPasswordInput.type = "text" ;
+    }
 }

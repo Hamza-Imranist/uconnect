@@ -230,6 +230,23 @@
     outline-color: #03C6AF;
     padding: 4vw;
 }
+.field-icon-1 {
+    position: absolute;
+    z-index: 200;
+    right: 15vw;
+    top: 66.2vh;
+    color: #CDCACA;
+}
+.field-icon-2 {
+    position: absolute;
+    z-index: 200;
+    right: 15vw;
+    top: 76.2vh;
+    color: #CDCACA;
+}
+.fa-eye-slash {
+    color: #03C6AF;
+}
 .signup-buttons-container {
     grid-area: signup-buttons;
     display: flex;

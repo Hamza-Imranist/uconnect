@@ -162,6 +162,16 @@
     outline-color: #03C6AF;
     padding: 4vw;
 }
+.field-icon {
+    position: absolute;
+    z-index: 200;
+    right: 15vw;
+    top: 56.2vh;
+    color: #CDCACA;
+}
+.fa-eye-slash {
+    color: #03C6AF;
+}
 .forgot-password-div {
     width: 80vw;
     height: 5vh;

@@ -374,6 +374,13 @@ body {
 #login-email-username-input::placeholder , #login-password-input::placeholder {
     color: #CDCACA;
 }
+.field-icon {
+    position: absolute;
+    z-index: 200;
+    right: 6vw;
+    top: 36.2vh;
+    color: #CDCACA;
+}
 .login-button-div {
     width: 20vw;
     display: flex;
@@ -559,6 +566,23 @@ body {
     border: 0.2vh solid #CDCACA;
     outline-color: #03C6AF;
     padding: 1vw;
+}
+.field-icon-1 {
+    position: absolute;
+    z-index: 200;
+    right: 6vw;
+    top: 50vh;
+    color: #CDCACA;
+}
+.field-icon-2 {
+    position: absolute;
+    z-index: 200;
+    right: 6vw;
+    top: 60vh;
+    color: #CDCACA;
+}
+.fa-eye-slash {
+    color: #03C6AF;
 }
 #signup-submit-button {
     background-color: #03C6AF;
