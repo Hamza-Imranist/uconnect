@@ -12,9 +12,12 @@
     background-color: white;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 17vh 83vh;
+    grid-template-rows: 17vh 14vh 57vh 12vh;
     grid-template-areas:
-    "header";
+    "header"
+    "google-fb"
+    "inputs"
+    "signup-buttons";
     position: relative;
     overflow-x: hidden;
 }
@@ -122,6 +125,96 @@
     background-color: rgba(227, 243, 241, 0.733);
     z-index: 1;
     display: none;
+}
+.signup-fb-google-container {
+    grid-area: google-fb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.signup-fb-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 65.5vw;
+    height: 6vh;
+}
+.fb-icon-div {
+    background-color: #008AD3;
+    width: 10vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fa-facebook-f {
+    color: white;
+}
+.fb-text-div {
+    background-color: #008AD3;
+    width: 55vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.fb-icon-div:hover , .fb-text-div:hover {
+    background-color: rgb(3, 119, 182);
+}
+.signup-google-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 65.5vw;
+    height: 6vh;
+}
+.google-icon-div {
+    background-color: #D34836;
+    width: 10vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fa-google-plus-g {
+    color: white;
+}
+.google-text-div {
+    background-color: #D34836;
+    width: 55vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.google-icon-div:hover , .google-text-div:hover {
+    background-color: rgb(184, 63, 47);
+}
+.signup-inputs-container {
+    grid-area: inputs;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.username-container , .email-container , .password-container , .confirm-password-container {
+    width: 80vw;
+    height: 13vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.signup-username-error , .signup-email-error , .signup-password-error , .signup-confirm-password-error {
+    height: 3vh;
+    width: 75vw;
+    font-size: ;
+}
+.signup-buttons-container {
+    grid-area: signup-buttons;
 }
 @keyframes rotateCrossLine1 {
     from {

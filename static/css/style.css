@@ -1885,7 +1885,7 @@ body {
     margin-top: 0;
 }
 .moto-line {
-    width: 72vw;
+    width: 74vw;
     font-size: 6.65vw;
 }
 
@@ -2187,7 +2187,7 @@ body {
 }
 .blog-illustration {
     width: 90vw;
-    height: 30vh;
+    height: 22vh;
     margin-top: 0vh;
     display: flex;
     justify-content: center;
