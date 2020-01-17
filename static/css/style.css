@@ -576,6 +576,12 @@ body {
     background-color: rgb(6, 173, 154);
     cursor: pointer;
 }
+.signup-button-div-container {
+    width: 25vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .signup-button-div {
     width: 20vw;
     display: flex;
