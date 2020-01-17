@@ -12,9 +12,13 @@
     background-color: white;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 17vh 83vh;
+    grid-template-rows: 17vh 5vh 8vh 40vh 12vh;
     grid-template-areas:
-    "header";
+    "header"
+    "."
+    "login-heading"
+    "inputs"
+    "signup-buttons";
     position: relative;
     overflow-x: hidden;
 }
@@ -122,6 +126,86 @@
     background-color: rgba(227, 243, 241, 0.733);
     z-index: 1;
     display: none;
+}
+.login-heading-div {
+    grid-area: login-heading;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7vw;
+    color: #03C6AF;
+    font-family: 'Noto Sans', sans-serif;
+}
+.login-inputs-container {
+    grid-area: inputs;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.username-email-container , .password-container {
+    width: 80vw;
+    height: 16vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login-username-email-label , .login-password-label {
+    height: 4vh;
+    width: 75vw;
+}
+#login-username-email-input , #login-password-input {
+    width: 75vw;
+    height: 7vh;
+    border: 0.2vh solid #CDCACA;
+    outline-color: #03C6AF;
+    padding: 4vw;
+}
+.forgot-password-div {
+    width: 80vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.forgot-password-text {
+    width: 75vw;
+    font-size: 3.2vw;
+}
+.forgot-password-text:hover {
+    color: rgb(6, 173, 154);
+}
+.login-buttons-container {
+    grid-area: signup-buttons;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-buttons-div {
+    width: 75vw;
+    height: 6vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.login-dont-have-container {
+    font-size: 3.2vw;
+}
+.login-dont-have-container:hover {
+    color: rgb(6, 173, 154);
+}
+#login-submit-button {
+    background-color: #03C6AF;
+    color: white;
+    border: none;
+    padding: 2vw;
+    border-radius: 2vw;
+}
+#login-submit-button:hover {
+    background-color: rgb(6, 173, 154);
+    outline: none;
+    border: none;
 }
 @keyframes rotateCrossLine1 {
     from {
