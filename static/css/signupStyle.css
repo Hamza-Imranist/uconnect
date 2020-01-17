@@ -12,9 +12,10 @@
     background-color: white;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 17vh 14vh 57vh 12vh;
+    grid-template-rows: 17vh 8vh 14vh 44vh 12vh;
     grid-template-areas:
     "header"
+    "signup-heading"
     "google-fb"
     "inputs"
     "signup-buttons";
@@ -126,6 +127,15 @@
     z-index: 1;
     display: none;
 }
+.signup-heading-div {
+    grid-area: signup-heading;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7vw;
+    color: #03C6AF;
+    font-family: 'Noto Sans', sans-serif;
+}
 .signup-fb-google-container {
     grid-area: google-fb;
     display: flex;
@@ -202,7 +212,7 @@
 }
 .username-container , .email-container , .password-container , .confirm-password-container {
     width: 80vw;
-    height: 13vh;
+    height: 10vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -213,8 +223,43 @@
     width: 75vw;
     font-size: ;
 }
+#signup-username-input , #signup-email-input , #signup-password-input , #signup-confirm-password-input {
+    width: 75vw;
+    height: 6vh;
+    border: 0.2vh solid #CDCACA;
+    outline-color: #03C6AF;
+    padding: 4vw;
+}
 .signup-buttons-container {
     grid-area: signup-buttons;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.signup-buttons-div {
+    width: 75vw;
+    height: 6vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.signup-already-container {
+    font-size: 3.2vw;
+}
+.signup-already-container:hover {
+    color: rgb(6, 173, 154);
+}
+#signup-submit-button {
+    background-color: #03C6AF;
+    color: white;
+    border: none;
+    padding: 2vw;
+    border-radius: 2vw;
+}
+#signup-submit-button:hover {
+    background-color: rgb(6, 173, 154);
+    outline: none;
+    border: none;
 }
 @keyframes rotateCrossLine1 {
     from {
