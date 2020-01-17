@@ -130,10 +130,10 @@
                     let form_data = signup_form.serialize();
                     form_data += '&submit=signup';               //To make it go to the 'signup' part of index view, (please look at the index view)
                     console.log(form_data);
-                    let username_error_field = $('p.js-username-error').html('');
-                    let email_error_field = $('p.js-email-error').html('');
-                    let password_error_field = $('p.js-password-error').html('');
-                    let confirm_password_error_field = $('p.js-confirm-password-error').html('');
+                    let username_error_field = $('p.signup-username-validation-output').html('');
+                    let email_error_field = $('p.signup-email-error').html('');
+                    let password_error_field = $('p.signup-password-error').html('');
+                    let confirm_password_error_field = $('p.signup-confirm-password-error').html('');
 
 
                     $.ajax({
@@ -199,11 +199,11 @@
                 <div class="header">
             <!--      LOGO DIV      -->
                     <div class="logo-div">
-<<<<<<< HEAD
-                        <a href="{% static 'templates/index.html' %}"><img src="{% static 'images/logo.svg' %}" alt="logo" class="logo-image"></a>
-=======
-                        <a href="index.html"><img src="{% static 'images/logo.svg' %}" alt="logo" class="logo-image"></a>
->>>>>>> djangoIntegration
+
+                        <a href="{% url 'Uconnect_app:index' %}"><img src="{% static 'images/logo.svg' %}" alt="logo" class="logo-image"></a>
+
+<!--                        <a href="index.html"><img src="{% static 'images/logo.svg' %}" alt="logo" class="logo-image"></a>-->
+
                     </div>
             <!--      DIV FOR NAV BAR      -->
                     <div class="nav-div">
@@ -417,7 +417,8 @@
                             <label for="signup-email-input"></label>
                         </div>
                         <div class="signup-username-input">
-                            <input type="text" id="signup-email-input" placeholder="email">
+                            <input type="text" id="signup-email-input" placeholder="email" name="{{ form.email.html_name }}" value="{{ form.email.value|default:'' }}">
+                            <p class="signup-email-error"></p>
                         </div>
                      </div>
 
@@ -426,7 +427,8 @@
                            <label for="signup-password-input"></label>
                        </div>
                        <div class="signup-password-input">
-                           <input type="password" id="signup-password-input" placeholder="password">
+                           <input type="password" id="signup-password-input" placeholder="password" name="{{ form.password.html_name }}" value="{{ form.password.value|default:'' }}">
+                            <p class="signup-password-error"></p>
                        </div>
                     </div>
 
@@ -435,7 +437,8 @@
                             <label for="signup-confirm-password-input"></label>
                         </div>
                         <div class="signup-password-input">
-                            <input type="password" id="signup-confirm-password-input" placeholder="confirm password">
+                            <input type="password" id="signup-confirm-password-input" placeholder="confirm password" name="{{ form.confirm_password.html_name }}" value="{{ form.confirm_password.value|default:'' }}">
+                            <p class="signup-confirm-password-error"></p>
                         </div>
                      </div>
 
