@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4259089c-1726-408f-a08f-9ba16e431459" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/loginForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/loginForm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/signupForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signupForm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="4259089c-1726-408f-a08f-9ba16e431459" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +103,7 @@
       <option name="presentableId" value="Default" />
       <updated>1579216534328</updated>
       <workItem from="1579216540938" duration="1128000" />
-      <workItem from="1579218503075" duration="2317000" />
+      <workItem from="1579218503075" duration="2645000" />
     </task>
     <servers />
   </component>
