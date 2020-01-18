@@ -1704,18 +1704,22 @@ body {
     {
         margin-left: 0vw;
     }
-    26%
+    25%
     {
         margin-left: -20vw;
     }
-    52%
+    50%
     {
         margin-left: -40vw;
     }
-    78%
+    75%
     {
         margin-left: -60vw;
     }
+    /* 80%
+    {
+        margin-left: -80vw;
+    } */
     100%
     {
         margin-left: 0vw;
