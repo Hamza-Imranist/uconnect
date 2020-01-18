@@ -208,19 +208,19 @@
             <!--      DIV FOR NAV BAR      -->
                     <div class="nav-div">
 
-                        <div class="navs services-button"><a href="#servicesPage" class="services-menu-text">Services</a> <i class="fas fa-caret-down"></i>
+                        <div class="navs services-button"><a href="#servicesPage/slide2" class="services-menu-text">Services</a> <i class="fas fa-caret-down"></i>
                             
                         <!--      DROPDOWN DIV      -->
 
                             <div class="services-dropdown">
                                 <div class="free-div">  
-                                    <a href="#servicesPage">Free Services</a>
+                                    <a href="#servicesPage/slide1">Free Services</a>
                                 </div>
                                 <div class="line">
 
                                 </div>
                                 <div class="paid-div">
-                                    <a href="#servicesPage">Paid Services</a>
+                                    <a href="#servicesPage/slide3">Paid Services</a>
                                 </div>
                             </div>
 
@@ -275,7 +275,7 @@
                             <i class="fas fa-search"></i>
                         </div> -->
                         <div class="get-started-button-div">
-                            <a href="#whatPage">
+                            <a href="#whatPage/slide2">
                                 <div class="get-started-button">
                                     GET STARTED
                                 </div>
@@ -446,8 +446,8 @@
                      </div>
 
                 </div>
-
-                <div class="signup-button-div">
+                <div class="signup-button-div-container">
+                    <div class="signup-button-div">
                    <div class="signup-already-div">
                        Already have an account?
                    </div>
@@ -455,6 +455,7 @@
                        <button type="submit" id="signup-submit-button" name="submit" value="signup">Signup</button>
                    </div>
                 </div>
+                    </div>
                 </form>
             </div>
             
@@ -476,7 +477,7 @@
 
 <!--                     WHAT PAGE DISTANCES SLIDE STARTS HERE                      -->
 
-            <div class="slide horizontal-scrolling">
+            <div class="slide horizontal-scrolling" data-anchor="slide1">
 
                 <div class="what-page-distances">
 
@@ -525,7 +526,7 @@
 
 <!--                       WHAT PAGE MAIN SLIDE STARTS HERE                       -->
 
-            <div class="slide horizontal-scrolling active">
+            <div class="slide horizontal-scrolling active" data-anchor="slide2">
 
                 <div class="what-page-main">
 
@@ -566,7 +567,7 @@
 
 <!--                       WHAT PAGE COMMUNITY SLIDE STARTS HERE                       -->
 
-            <div class="slide horizontal-scrolling">
+            <div class="slide horizontal-scrolling" data-anchor="slide3">
 
                 <div class="what-page-community">
 
@@ -740,7 +741,7 @@
 
 <!--                 FIRST SLIDE OF FREE SERVICES STARTS HERE                       -->
 
-            <div class="slide horizontal-scrolling">
+            <div class="slide horizontal-scrolling" data-anchor="slide1">
 
                 <div class="free-services-page">
 
@@ -816,7 +817,7 @@
 <!--                 SECOND SLIDE OF SERVICES STARTS HERE                       -->
 
 
-            <div class="slide horizontal-scrolling active">
+            <div class="slide horizontal-scrolling active" data-anchor="slide2">
 
                 <div class="services-page">
 
@@ -858,7 +859,7 @@
 <!--               THIRD SLIDE OF PAID SERVICES STARTS HERE                   -->
 
 
-            <div class="slide horizontal-scrolling">
+            <div class="slide horizontal-scrolling" data-anchor="slide3">
 
                 <div class="paid-services-page">
 

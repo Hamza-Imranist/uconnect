@@ -380,6 +380,7 @@ body {
     right: 6vw;
     top: 36.2vh;
     color: #CDCACA;
+    cursor: pointer;
 }
 .login-button-div {
     width: 20vw;
@@ -573,6 +574,7 @@ body {
     right: 6vw;
     top: 50vh;
     color: #CDCACA;
+    cursor: pointer;
 }
 .field-icon-2 {
     position: absolute;
@@ -580,6 +582,7 @@ body {
     right: 6vw;
     top: 60vh;
     color: #CDCACA;
+    cursor: pointer;
 }
 .fa-eye-slash {
     color: #03C6AF;
@@ -1892,6 +1895,7 @@ body {
     align-items: center;
     padding-left: 20vw;
     padding-right: 20vw;
+    display: none;
 }
 .facebook , .twitter , .email {
     margin-bottom: 0;
@@ -2224,7 +2228,7 @@ body {
 
             /* LAST DIV CONTAINING MOTTOS OF BLOG */
 .blog-join-mottos {
-    align-items: center;
+    align-items: flex-start;
 }
 .blog-join-div-1 , .blog-join-div-2 , .blog-join-div-3 {
     flex-direction: column-reverse;
