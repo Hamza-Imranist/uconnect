@@ -227,7 +227,7 @@
 }
 #signup-username-input , #signup-email-input , #signup-password-input , #signup-confirm-password-input {
     width: 75vw;
-    height: 6vh;
+    height: 7vh;
     border: 0.2vh solid #CDCACA;
     outline-color: #03C6AF;
     padding: 4vw;
