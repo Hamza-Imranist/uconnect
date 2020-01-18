@@ -1734,7 +1734,7 @@ body {
     height: 65vh;
     width: 70vw;
     top: 0;
-    right: -80vw;
+    right: 0vw;
     background-color: white;
     display: flex;
     justify-content: space-around;
@@ -1746,6 +1746,8 @@ body {
     z-index: 1000;
     border-bottom-left-radius: 4vw;
     border-top-left-radius: 4vw;
+    transform: translate(110%);
+    transition: transform 1s cubic-bezier(0.77,0.2,0.05,1.0);
 }
 .hamburger-nav-links li {
     width: 50vw;
@@ -2344,7 +2346,6 @@ body {
 .free-services-tag {
     font-size: 7vw;
     width: 15vw;
-    height: 60vh;
 }
 
             /* SECOND DIV CONTAINING EXAMPLES OF FREE SERVICES  */
@@ -2377,7 +2378,6 @@ body {
 .paid-services-tag {
     font-size: 7vw;
     width: 11vw;
-    height: 60vh;
 }
 
             /* SECOND DIV CONTAINING EXAMPLES OF PAID SERVICES  */

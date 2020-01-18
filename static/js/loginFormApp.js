@@ -7,14 +7,17 @@ let passwordInput = document.querySelector("#login-password-input");
 
 menuButton.addEventListener("click",displayMenu);
 function displayMenu(){
-    menu.style.animation = "hamburger-menu-anim 1.2s 0.3s forwards";
+    // menu.style.animation = "hamburger-menu-anim 1.2s 0.3s forwards";
+    menu.style.transform = "none";
     backPage.style.display = "block";
     backPage.addEventListener("click",()=>{
-        menu.style.animation = "closeMenuAnim 1.2s 0.1s forwards";
+        // menu.style.animation = "closeMenuAnim 1.2s 0.1s forwards";
+        menu.style.transform = "translate(110%)";
         backPage.style.display = "none";
     })
     crossMenuButton.addEventListener("click",()=>{
-        menu.style.animation = "closeMenuAnim 1.2s 0.1s forwards";
+        // menu.style.animation = "closeMenuAnim 1.2s 0.1s forwards";
+        menu.style.transform = "translate(110%)";
         backPage.style.display = "none";
     })
 }

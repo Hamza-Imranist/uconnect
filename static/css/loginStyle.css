@@ -56,7 +56,7 @@
     position: absolute;
     height: 65vh;
     width: 70vw;
-    right: -75vw;
+    right: 0vw;
     top: 0;
     background-color: white;
     display: flex;
@@ -69,6 +69,8 @@
     z-index: 100000;
     border-bottom-left-radius: 4vw;
     border-top-left-radius: 4vw;
+    transform: translate(110%);
+    transition: transform 1s cubic-bezier(0.77,0.2,0.05,1.0);
 }
 .hamburger-nav-links li {
     width: 50vw;
