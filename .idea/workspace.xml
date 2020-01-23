@@ -2,7 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4259089c-1726-408f-a08f-9ba16e431459" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/root.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog_app/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog_app/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog_app/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog_app/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog_app/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog_app/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog_app/posts.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog_app/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog_app/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog_app/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/default.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/profile_pics/dawood.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/profile_pics/fakhar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/profile_pics/imranist.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/blog_app/css/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/p1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/blog_app/blog_base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/blog_app/blog_index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/blog_app/post_confirm_delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/blog_app/post_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/blog_app/post_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/blog_app/profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/blog_app/user_posts.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Uconnect/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Uconnect/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Uconnect/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Uconnect/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,11 +60,19 @@
   <component name="ProjectId" id="1WUuXaxzVahg7p8x9vR7Sf5NOtm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/db.sqlite3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/images" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/images" />
+      <recent name="$PROJECT_DIR$/media" />
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates" />
     </key>
@@ -109,7 +144,7 @@
       <workItem from="1579509883228" duration="37000" />
       <workItem from="1579511103201" duration="6975000" />
       <workItem from="1579580011056" duration="2854000" />
-      <workItem from="1579802845652" duration="12000" />
+      <workItem from="1579802845652" duration="4070000" />
     </task>
     <servers />
   </component>
