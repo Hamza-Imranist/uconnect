@@ -17,7 +17,7 @@
 <script type="text/javascript">
         $(document).ready(function () {
             console.log("page loadded")
-            {#/////////////      AJAX LOGIN FORM      //////////////////////#}
+            // {#/////////////      AJAX LOGIN FORM      //////////////////////#}
 
             let $invalid = $('.invalid');
             $invalid.hide();
@@ -26,7 +26,7 @@
                 event.preventDefault();
 
 
-                {#  Code to submit csrf token with in this post request  #}
+                // {#  Code to submit csrf token with in this post request  #}
                 $.ajaxSetup({
                     beforeSend: function(xhr, settings) {
                         function getCookie(name) {
@@ -51,7 +51,7 @@
             }
             });
 
-                {#    AJAX validating the entered credentials  #}
+                // {#    AJAX validating the entered credentials  #}
                 $.ajax({
                     type: "POST",
                     data: {
@@ -78,7 +78,7 @@
 
                     });
 
-                    {# Hides the .invalid field when password filed is clicked #}
+                    // {# Hides the .invalid field when password filed is clicked #}
                     $('.password').click(function () {
                         $invalid.hide();
                      });
@@ -86,7 +86,7 @@
 
 
 
-                {#  ///////////////////      username validate AJAX       /////////////////   #}
+                // {#  ///////////////////      username validate AJAX       /////////////////   #}
 
                 $('input#signup-username-input').keyup(function () {
 
@@ -122,7 +122,7 @@
 
                 });
 
-                {#///////////////////////////   SIGNUP FORM     /////////////////#}
+                // {#///////////////////////////   SIGNUP FORM     /////////////////#}
 
                 let signup_form = $('form#user-form');
                 signup_form.submit(function (e) {
@@ -138,7 +138,7 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: '{% url 'Uconnect_app:index' %}',
+                        url: '{% url 'Uconnect_app:index' %}' ,
                         dataType: 'json',
                         data: form_data,
                         success: function (json) {
