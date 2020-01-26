@@ -30,6 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'uconnect-test.herokuapp.com',
+    '127.0.0.1',
 ]
 
 
