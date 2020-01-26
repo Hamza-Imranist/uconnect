@@ -1,0 +1,29 @@
+{% extends 'blog_app/blog_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Post| Create {% endblock %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Blog Post</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                    {#  object.pk == True means we are in PostUpdate view, else we are in PostCreate view   #}
+                <button class="btn btn-outline-info" type="submit">{% if object.pk %}
+                                                                            Update
+                                                                    {% else %}
+                                                                            Post
+                                                                    {% endif %}</button>
+                <a class="btn btn-outline-secondary float-right" href="{% if object.pk %}
+                                                                                {% url 'blog_app:post_detail' object.pk %}
+                                                                        {% else %}
+                                                                                {% url 'blog_app:blog_index' %}
+                                                                        {% endif %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -16,58 +16,37 @@
 
 <script type="text/javascript">
         $(document).ready(function () {
-            console.log("page loadded")
+            console.log("page loadded");
+
             // {#/////////////      AJAX LOGIN FORM      //////////////////////#}
 
-            let $invalid = $('.invalid');
-            $invalid.hide();
-            let $myForm = $('#login_form');
-            $myForm.submit(function (event) {
+            let $login_validation = $('#login-validation-output');
+            $login_validation.css('color', 'red');
+
+            let $LoginForm = $('#login_form');
+
+            $LoginForm.submit(function (event) {
                 event.preventDefault();
-
-
-                // {#  Code to submit csrf token with in this post request  #}
-                $.ajaxSetup({
-                    beforeSend: function(xhr, settings) {
-                        function getCookie(name) {
-                        var cookieValue = null;
-                        if (document.cookie && document.cookie !== '') {
-                        var cookies = document.cookie.split(';');
-                        for (var i = 0; i < cookies.length; i++) {
-                         var cookie = jQuery.trim(cookies[i]);
-                         // Does this cookie string begin with the name we want?
-                         if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                             cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                             break;
-                         }
-                     }
-                 }
-                 return cookieValue;
-             }
-             if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-                 // Only send the token to relative URLs i.e. locally.
-                 xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-             }
-            }
-            });
+                console.log("inside login");
 
                 // {#    AJAX validating the entered credentials  #}
                 $.ajax({
                     type: "POST",
                     data: {
-                        username: $('.username').val(),
-                        password: $('.password').val(),
+                        username: $('#login-email-username-input').val(),
+                        password: $('#login-password-input').val(),
+                        csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").attr('value'),
                         submit: 'login',
                     },
-                    url:'{% url "Uconnect_app:index" %}',
+                    url:"{% url 'Uconnect_app:index' %}",
                     dataType: 'json',
                     success: function (data) {
                         if(data.is_valid){
-                            window.location.href = '{% url 'Uconnect_app:index'%}'
+                            window.location.href = '{% url 'blog_app:blog_index'%}'
                         }
                         else{
                             {#$('.invalid').html("Invalid username/password!");#}
-                            $invalid.show();
+                            $login_validation.html("username/password is incorrect");
                             $('.password').val('')
                         }
                     },
@@ -79,8 +58,8 @@
                     });
 
                     // {# Hides the .invalid field when password filed is clicked #}
-                    $('.password').click(function () {
-                        $invalid.hide();
+                    $('#login-password-input').click(function () {
+                        $login_validation.html('');
                      });
 
 
@@ -319,7 +298,7 @@
 
 
             <!--      LOGIN FORM PAGE STARTS HERE     -->
-
+                <form id="login_form" action="{% url 'Uconnect_app:index' %}" method="post">
                 <div class="login-form-page">
 
                     <div class="login-heading-div">
@@ -348,6 +327,9 @@
                                <span toggle="#login-password-input" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                            </div>
                         </div>
+                        <div>
+                            <p id="login-validation-output"></p>
+                        </div>
                         <div class="login-forgot-div-container">
                             <div class="login-forgot-div">
                                 Forgot your password?
@@ -368,6 +350,7 @@
 
                     </div>
                 </div>
+                </form>
 
             <!--      LOGIN FORM PAGE ENDS HERE     -->
 
