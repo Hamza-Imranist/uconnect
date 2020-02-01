@@ -2,6 +2,7 @@
   <dictionary name="root">
     <words>
       <w>csrfmiddlewaretoken</w>
+      <w>uconnect</w>
     </words>
   </dictionary>
 </component>

@@ -1,10 +1,17 @@
 from django.shortcuts import render
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from .forms import SignupForm
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+import os
+from pathlib import Path
+from Uconnect import settings
+from email.mime.image import MIMEImage
+from django.core.mail import EmailMultiAlternatives, EmailMessage
 
 # Create your views here.
 
@@ -20,6 +27,7 @@ def index(request):
             if form.is_valid():
                 user = form.save()
                 user.set_password(user.password)
+                send_email(user)
                 user.save()
                 # return HttpResponseRedirect(reverse("Uconnect_app:index"))
                 return JsonResponse({'user_created': True})
@@ -98,3 +106,35 @@ def validate_username(request):
         # print("is taken")
         data['message'] = 'user already exists!'
     return JsonResponse(data)
+
+
+def send_email(form):
+    subject = "Uconnect Signup Successful"
+    html_message = render_to_string('signup_email.html', {'form': form})
+    plain_message = strip_tags(html_message)
+    from_email = 'uconnect786@gmail.com'
+    to_email = [form.email]
+
+    msg = EmailMultiAlternatives(subject=subject, body=plain_message, from_email=from_email, to=to_email)
+    msg.attach_alternative(html_message, 'text/html')
+    msg.content_subtype = 'html'
+    msg.mixed_subtype = 'related'
+    images = [
+        settings.BASE_DIR + '/static/images/blogsImage.png',
+        settings.BASE_DIR + '/static/images/logo.png',
+        settings.BASE_DIR + '/static/images/facebook2x.png',
+        settings.BASE_DIR + '/static/images/linkedin2x.png',
+        settings.BASE_DIR + '/static/images/twitter2x.png',
+    ]
+
+    for img_path in images:
+        print(img_path)
+        with open(img_path, 'rb') as image:
+            print(image)
+            image_name = Path(img_path).name
+            print(image_name)
+            banner_image = MIMEImage(image.read())
+            print(banner_image)
+            banner_image.add_header('Content-ID', f'<{image_name}>')
+            msg.attach(banner_image)
+    msg.send()
