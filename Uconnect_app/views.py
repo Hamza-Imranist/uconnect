@@ -112,7 +112,11 @@ def send_email(form):
     subject = "Uconnect Signup Successful"
     html_message = render_to_string('signup_email.html', {'form': form})
     plain_message = strip_tags(html_message)
+<<<<<<< Updated upstream
     from_email = 'uconnect786@gmail.com'
+=======
+    from_email = 'fakharmahmood38@gmail.com'
+>>>>>>> Stashed changes
     to_email = [form.email]
 
     msg = EmailMultiAlternatives(subject=subject, body=plain_message, from_email=from_email, to=to_email)

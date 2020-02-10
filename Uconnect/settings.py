@@ -165,5 +165,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
+<<<<<<< Updated upstream
 EMAIL_HOST_USER = 'uconnect786@gmail.com'
 EMAIL_HOST_PASSWORD = 'Uconnect@123'
+=======
+EMAIL_HOST_USER = 'fakharmahmood38@gmail.com'
+EMAIL_HOST_PASSWORD = 'KaMeenA@1999'
+>>>>>>> Stashed changes
