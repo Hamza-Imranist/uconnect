@@ -137,3 +137,15 @@ def send_email(form):
             banner_image.add_header('Content-ID', f'<{image_name}>')
             msg.attach(banner_image)
     msg.send()
+
+
+def mb_signup(request):
+    context_dict = {'blog': '#blogsPage', }
+    response = render(request, 'signupForm.html', context_dict)
+    return response
+
+
+def mb_login(request):
+    context_dict = {}
+    response = render(request, 'loginForm.html', context_dict)
+    return response

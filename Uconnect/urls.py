@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Uconnect_app/', include('Uconnect_app.urls', 'Uconnect_app')),
-    path('blog_app/', include('blog_app.urls', 'blog_app')),
+    path('Uconnect_app/', index, name='variable_index'),    # For parsing variables, see it signupForm.html line 40...44
     re_path(r'^$', index, name='index')
 ]
 

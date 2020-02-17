@@ -13,7 +13,7 @@
     <script src="https://kit.fontawesome.com/5a01f232c4.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
-
+<!--
 <script type="text/javascript">
         $(document).ready(function () {
             console.log("page loadded");
@@ -38,11 +38,11 @@
                         csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").attr('value'),
                         submit: 'login',
                     },
-                    url:"{% url 'Uconnect_app:index' %}",
+                    url:"{}",
                     dataType: 'json',
                     success: function (data) {
                         if(data.is_valid){
-                            window.location.href = '{% url 'blog_app:blog_index'%}'
+                            window.location.href = '{}'
                         }
                         else{
                             {#$('.invalid').html("Invalid username/password!");#}
@@ -79,7 +79,7 @@
                     if ($username !== '' ){                          //only triggered if username field is not empty
                     $.ajax({
 
-                        url: '{% url 'Uconnect_app:validate_username' %}',
+                        url: '{}',
                         data: form.serialize(),
                         dataType: 'json',
                         success: function (data) {
@@ -117,12 +117,12 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: '{% url 'Uconnect_app:index' %}' ,
+                        url: '{}' ,
                         dataType: 'json',
                         data: form_data,
                         success: function (json) {
                             if (json.user_created){
-                                window.location.href = '{% url 'Uconnect_app:index'%}';
+                                window.location.href = '{}';
                                     console.log("Signup succeeded")
                             }
                             else{
@@ -159,7 +159,7 @@
                 });
 
 </script>
-
+-->
 
 <body>
 
@@ -290,8 +290,8 @@
                         <li><a href="#servicesPage/slide2">Services</a></li>
                         <li><a href="#blogsPage">Blogs</a></li>
                         <li><a href="#aboutPage">About us</a></li>
-                        <li><a href="#">Log in</a></li>
-                        <li><a href="#">Sign up</a></li>
+                        <li><a href="{% url 'Uconnect_app:mobile_login' %}">Log in</a></li>
+                        <li><a href="{% url 'Uconnect_app:mobile_signup' %}">Sign up</a></li>
                     </div>
                 </div>
 

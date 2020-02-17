@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,14 +10,14 @@
     <link rel="stylesheet" href="../static/css/loginStyle.css">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Ma+Shan+Zheng|Marck+Script|Noto+Sans:700|Roboto|Work+Sans&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5a01f232c4.js" crossorigin="anonymous"></script>
-    <script src="../static/js/loginFormApp.js" defer></script>
+    <script src="{% static 'js/loginFormApp.js' %}" defer></script>
 </head>
 <body>
     <div class="login-form-container">
         <div class="login-form-header-div">
              <!--      LOGO DIV      -->
              <div class="logo-div">
-                <a href="#"><img src="../static/images/logo.svg" alt="logo" class="logo-image"></a>
+                <a href="{% url 'Uconnect_app:index' %}"><img src="{% static 'images/logo.svg' %}" alt="logo" class="logo-image"></a>
             </div>
              <!--      HAMBURGER MENU STARTS HERE     -->
              <div class="hamburger-menu">
@@ -34,13 +35,12 @@
                             <div class="cross-line-3"></div>
                     </div>
                     <li>
-                        <img src="../static/images/logo.svg" alt="" class="hamburger-logo-img">
+                        <img src="{% static 'images/logo.svg' %}" alt="" class="hamburger-logo-img">
                     </li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Blogs</a></li>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Log in</a></li>
-                    <li><a href="#">Sign up</a></li>
+                    <li><a href="{% url 'variable_index' %}?#servicesPage/slide2">Services</a></li>
+                    <li><a href="{% url 'variable_index' %}?#blogsPage">Blogs</a></li>
+                    <li><a href="{% url 'variable_index' %}?#aboutPage">About us</a></li>
+                    <li><a href="{% url 'Uconnect_app:mobile_login' %}">Sign Up</a></li>
         </div>
         <div class="back-page">
 
@@ -74,9 +74,11 @@
         </div>
         <div class="login-buttons-container">
             <div class="login-buttons-div">
-                <div class="login-dont-have-container">
-                    Do not have any account.
-                </div>
+                <a href="{% url 'Uconnect_app:mobile_signup' %}">
+                    <div class="login-dont-have-container">
+                        Do not have any account?
+                    </div>
+                </a>
                 <div class="login-submit-container">
                     <button type="submit" id="login-submit-button" name="submit" value="login">Login</button>
                 </div>
