@@ -345,12 +345,12 @@
                        </div>
 
                        <div class="login-submit-button-div">
-                           <button id="login-submit-button">LOGIN</button>
+                           <button id="login-submit-button" type="submit" onclick="return alert('This site is under construction at the moment...!')">LOGIN</button>
                        </div>
 
                     </div>
                 </div>
-                </form>
+
 
             <!--      LOGIN FORM PAGE ENDS HERE     -->
 
@@ -381,8 +381,8 @@
                 </div>
 
 
-                <form id="user-form" action="{% url 'Uconnect_app:index' %}" method="post">
-                {% csrf_token %}
+{#                <form id="user-form" action="{% url 'Uconnect_app:index' %}" method="post">#}
+{#                {% csrf_token %}#}
                 <div class="signup-inputs-div-container">
 
                    <div class="signup-username-div">
@@ -435,11 +435,10 @@
                        Already have an account?
                    </div>
                    <div class="signup-submit-button-div">
-                       <button type="submit" id="signup-submit-button" name="submit" value="signup">Signup</button>
+                       <button type="submit" id="signup-submit-button" name="submit" value="signup" onclick="return alert('This site is under construction at the moment')">Signup</button>
                    </div>
                 </div>
                     </div>
-                </form>
             </div>
             
             <!--      BACK PAGE STARTS HERE     -->
