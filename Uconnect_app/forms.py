@@ -16,6 +16,9 @@ class SignupForm(forms.ModelForm):
         cleaned_data = super(SignupForm, self).clean()
         password = cleaned_data.get('password')
         confirm_password = cleaned_data.get("confirm_password")
+        email = cleaned_data.get('email')
 
         if password != confirm_password:
             self.add_error("confirm_password", 'passwords do not match!')
+        elif User.objects.filter(email__iexact=email).exists():
+            self.add_error("email", "This email is already registered")

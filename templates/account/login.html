@@ -1,0 +1,158 @@
+{% load static %}
+{% get_static_prefix as static_prefix %}
+{% load socialaccount %}
+{% providers_media_js %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block bootstrap %}{% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block head_title %} Profile{% endblock %} | uConnect</title>
+    <link rel="shortcut icon" href="{{ static_prefix }}images/favicon.png">
+    <link rel="stylesheet" href="{{ static_prefix }}css/profile.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Ma+Shan+Zheng|Marck+Script|Noto+Sans:700|Roboto|Work+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'js/fullPage.js-master/src/fullpage.css' %}">
+    <script src="https://kit.fontawesome.com/5a01f232c4.js" crossorigin="anonymous"></script>
+    <script src="{{ static_prefix }}js/profileApp.js" defer></script>
+
+    <script src="https://kit.fontawesome.com/5a01f232c4.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+    <script>
+       function toggleType() {
+          var x = document.getElementById("login-password-input");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+       }
+    </script>
+
+    <div class="profile-page-wrapper">
+        <div class="profile-page-header">
+            <div class="navbar-div-container">
+                <div class="icon-div icon-1">
+                    <a href="{% url 'Uconnect_app:index' %}"><i class="fas fa-home"></i></a>
+                </div>
+                <div class="icon-div icon-2">
+                    <a href="{% url 'Uconnect_app:index' %}#servicesPage"><i class="fas fa-hands-helping"></i></a>
+                </div>
+                <div class="icon-div icon-3">
+                    <a href="{% url 'Uconnect_app:index' %}#blogsPage"><i class="fas fa-pencil-alt"></i></a>
+                </div>
+            </div>
+            <div class="logo-div">
+                <img src="{{ static_prefix }}images/logo.png" alt="uconnect logo" style="width: 140px" class="logo-header-image">
+            </div>
+             <div class="search-pic-div">
+                <div class="profile-pic-div">
+                    {% if request.user.is_authenticated %}
+                        <img src="{{ static_prefix }}images/log-out-icon.png" alt="logout icon" class="profile-avatar-header" onclick="window.location.href = '{% url 'account_logout' %}'" title="Logout">
+                    {% else %}
+                        <img src="{{ static_prefix }}images/profileAvatar.svg" alt="profile avatar" class="profile-avatar-header">
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+        <div style="display: block; padding-left:1%; padding-top:1%">
+            <div class="web-login-form-page">
+
+        <div class="login-heading-div">
+           <div class="login-heading">
+               LOGIN
+           </div>
+        </div>
+        <div style="text-align: left">
+            <br>
+        </div>
+        <div>
+                <div class="facebook-icon-signup">
+                    <a class="facebook-icon-signup" href="{% provider_login_url "facebook" method="js_sdk" %}"><i class="fab fa-facebook-f"></i></a>
+                    <a class="google-icon-signup" href="{% provider_login_url "google" process='login' %}"><i class="fab fa-google"></i></a>
+                </div>
+        </div>
+
+        <form method="post" action="{% url 'account_login' %}">
+        {% csrf_token %}
+            <div class="login-inputs-div-container">
+
+               <div class="login-username-div">
+                   <div class="login-username-label">
+                       <label for="login-email-username-input">Username or email:</label>
+                   </div>
+                   <div class="login-username-input">
+                       <input type="text" id="login-email-username-input" name="login" placeholder="email/username" required>
+                   </div>
+{#                   {% if form.login.errors %}#}
+{#                       {% for error in form.login.errors %}#}
+{#                           <br>#}
+{#                           <div class="alert alert-danger" role="alert">#}
+{#                                *{{ error }}#}
+{#                           </div>#}
+{#                       {% endfor %}#}
+{#                   {% endif %}#}
+                </div>
+
+                <div class="login-password-div">
+                   <div class="login-password-label">
+                       <label for="login-password-input">Password:</label>
+                   </div>
+                   <div class="login-password-input">
+                       <input type="password" id="login-password-input" placeholder="password" name="password" required>
+                       <span toggle="#login-password-input" class="fa fa-fw fa-eye field-icon toggle-password" onclick="toggleType()"></span>
+                   </div>
+                </div>
+                <div style="font-style: oblique; color: #d51119; text-align: center">
+                    {% if form.non_field_errors %}
+
+                        {% for error in form.non_field_errors %}
+                           <br>Username/password is incorrect!<br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="login-forgot-div-container">
+                    <div class="login-forgot-div">
+                       <a class="login-forgot-div" href="{% url 'account_reset_password' %}">Forgot your password?<br></a>
+                    </div>
+                </div>
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+
+
+            </div>
+
+            <div class="login-button-div">
+
+               <div class="dont-have-div" onclick="window.location.href = '{% url 'account_signup' %}'">
+                   <br>Do not have any account?
+               </div>
+
+               <div class="login-submit-button-div">
+                   <br><button id="login-submit-button" type="submit">LOGIN</button>
+               </div>
+
+            </div>
+        </form>
+    </div>
+        </div>
+
+
+    </div>
+
+
+
+
+    <script src="{% static 'js/fullPage.js-master/src/fullpage.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+
+
+</body>

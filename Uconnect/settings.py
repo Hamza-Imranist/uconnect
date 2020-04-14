@@ -20,6 +20,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 # X_FRAME_OPTIONS = 'DENY'
 
 import os
+from django.urls import reverse
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,8 +39,9 @@ SECRET_KEY = 'ibm9lr*8fk@qw6es3%cw4u$2%wy-s132=c%0xur(^5r@jiq@n3'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'uconnect-test.herokuapp.com',
+    'uconnect.teamalif.com',
     '127.0.0.1',
+    'localhost',
 ]
 
 
@@ -48,13 +50,21 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Uconnect_app',
     'crispy_forms',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,6 +94,16 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+)
 
 WSGI_APPLICATION = 'Uconnect.wsgi.application'
 
@@ -156,7 +176,8 @@ MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
 
-LOGIN_URL = '/Uconnect_app/index'
+# Login Page url
+LOGIN_URL = '/accounts/login/'
 
 # EMAIL SETTINGS
 
@@ -166,3 +187,12 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'uconnect786@gmail.com'
 EMAIL_HOST_PASSWORD = 'Uconnect@123'
+
+
+LOGIN_REDIRECT_URL = '/accounts/profile/'
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http"
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True

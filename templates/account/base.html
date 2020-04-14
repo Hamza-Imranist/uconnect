@@ -1,0 +1,61 @@
+{% load static %}
+{% get_static_prefix as static_prefix %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block bootstrap %}{% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block head_title %} Profile{% endblock %} | uConnect</title>
+    <link rel="shortcut icon" href="{{ static_prefix }}images/favicon.png">
+    <link rel="stylesheet" href="{{ static_prefix }}css/profile.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Ma+Shan+Zheng|Marck+Script|Noto+Sans:700|Roboto|Work+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'js/fullPage.js-master/src/fullpage.css' %}">
+    <script src="https://kit.fontawesome.com/5a01f232c4.js" crossorigin="anonymous"></script>
+    <script src="{{ static_prefix }}js/profileApp.js" defer></script>
+
+    <script src="https://kit.fontawesome.com/5a01f232c4.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+
+    <div class="profile-page-wrapper">
+        <div class="profile-page-header">
+            <div class="navbar-div-container">
+                <div class="icon-div icon-1">
+                    <a href="{% url 'Uconnect_app:index' %}"><i class="fas fa-home"></i></a>
+                </div>
+                <div class="icon-div icon-2">
+                    <a href="{% url 'Uconnect_app:index' %}#servicesPage"><i class="fas fa-hands-helping"></i></a>
+                </div>
+                <div class="icon-div icon-3">
+                    <a href="{% url 'Uconnect_app:index' %}#blogsPage"><i class="fas fa-pencil-alt"></i></a>
+                </div>
+            </div>
+            <div class="logo-div">
+                <img src="{{ static_prefix }}images/logo.png" alt="uconnect logo" style="width: 140px" class="logo-header-image">
+            </div>
+             <div class="search-pic-div">
+                <div class="profile-pic-div">
+                    {% if request.user.is_authenticated %}
+                        <img src="{{ static_prefix }}images/log-out-icon.png" alt="logout icon" class="profile-avatar-header" onclick="window.location.href = '{% url 'account_logout' %}'" title="Logout">
+                    {% else %}
+                        <img src="{{ static_prefix }}images/profileAvatar.svg" alt="profile avatar" class="profile-avatar-header">
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+        <div style="display: block; padding-left:1%; padding-top:1%">
+            {% block content %}{% endblock %}
+        </div>
+
+
+    </div>
+
+    <script src="{% static 'js/fullPage.js-master/src/fullpage.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+</body>

@@ -310,7 +310,7 @@ body {
     z-index: 1000;
     position: absolute;
     width: 30vw;
-    height: 60vh;
+    height: 72vh;
     background-color: white;
     -webkit-box-shadow: 6px 8px 20px -1px rgba(117,117,117,0.7); 
     box-shadow: 6px 8px 20px -1px rgba(117,117,117,0.7);
@@ -324,12 +324,38 @@ body {
     display: none;
     transition: all 0.5s ease-in-out;
 }
+.web-login-form-page {
+    z-index: 1000;
+    position: absolute;
+    width: 30vw;
+    height: 72vh;
+    background-color: white;
+    -webkit-box-shadow: 6px 8px 20px -1px rgba(117,117,117,0.7);
+    box-shadow: 6px 8px 20px -1px rgba(117,117,117,0.7);
+    border-radius: 3.5vw;
+    margin-left: 48vw;
+    margin-top: 8vh;
+    margin-bottom: 12vh;
+    transform: translate(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*display: none;*/
+    transition: all 0.5s ease-in-out;
+}
 
 .login-heading-div {
     align-items: flex-end;
 }
 
 .login-heading {
+    font-size: 3vw;
+    font-weight: bolder;
+    color: #03C6AF;
+    margin-top: 4vh;
+    font-family: 'Noto Sans', sans-serif;
+}
+.allauth-heading {
     font-size: 3vw;
     font-weight: bolder;
     color: #03C6AF;
@@ -378,10 +404,11 @@ body {
     position: absolute;
     z-index: 200;
     right: 6vw;
-    top: 36.2vh;
+    top: 46.2vh;
     color: #CDCACA;
     cursor: pointer;
 }
+
 .login-button-div {
     width: 20vw;
     display: flex;
@@ -428,6 +455,23 @@ body {
     background-color: rgb(6, 173, 154);
     cursor: pointer;
 }
+#allauth-pass-change-done-submit-button {
+    background-color: #03C6AF;
+    color: white;
+    border-radius: 1vw;
+    width: 10vw;
+    height: 5.5vh;
+    border: none;
+    font-weight: bolder;
+    font-size: 1vw;
+    letter-spacing: 0.1vw;
+    outline: none;
+    transition: all 0.5s ease-in-out;
+}
+#allauth-pass-change-done-submit-button:hover {
+    background-color: rgb(6, 173, 154);
+    cursor: pointer;
+}
 
             /* LOGIN PAGE ENDS HERE */
 
@@ -449,6 +493,22 @@ body {
     flex-direction: column;
     align-items: center;
     display: none;
+}
+.web-signup-form-page {
+    z-index: 500;
+    position: absolute;
+    width: 30vw;
+    height: 80vh;
+    background-color: white;
+    -webkit-box-shadow: 6px 8px 20px -1px rgba(117,117,117,0.7);
+    box-shadow: 6px 8px 20px -1px rgba(117,117,117,0.7);
+    border-radius: 3.5vw;
+    margin-left: 32vw;
+    margin-top: 7vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*display: none;*/
 }
 .signup-heading-div , .signup-username-div , .signup-password-div , .signup-button-div {
     width: 25vw;
@@ -531,7 +591,7 @@ body {
 .google-icon-signup:hover {
     background-color: rgb(184, 63, 47);
 }
-.fa-google-plus-g {
+.fa-google {
     color: white;
     font-size: 2vw;
 }
@@ -603,6 +663,7 @@ body {
     background-color: rgb(6, 173, 154);
     cursor: pointer;
 }
+
 .signup-button-div-container {
     width: 25vw;
     display: flex;

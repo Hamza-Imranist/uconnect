@@ -18,13 +18,14 @@ from django.urls import path, include, re_path
 from Uconnect_app.views import index
 from django.conf import settings
 from django.conf.urls.static import static
+from Uconnect_app.views import user_profile_view, index, test_template
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Uconnect_app/', include('Uconnect_app.urls', 'Uconnect_app')),
     path('Uconnect_app/', index, name='variable_index'),    # For parsing variables, see it signupForm.html line 40...44
-    re_path(r'^$', index, name='index')
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    re_path(r'^$', index, name='index'),
+    path('accounts/', include('allauth.urls')),
+    path('accounts/profile/', user_profile_view, name='user_profile'),
+    path('test-template/', test_template),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,3 +1,5 @@
+{% load static %}
+{% get_static_prefix as static_prefix %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,28 +7,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> Profile | uConnect </title>
-    <link rel="shortcut icon" href="../static/images/favicon.png">
-    <link rel="stylesheet" href="../static/css/profile.css">
+    <link rel="shortcut icon" href="{{ static_prefix }}images/favicon.png">
+    <link rel="stylesheet" href="{{ static_prefix }}css/profile.css">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Ma+Shan+Zheng|Marck+Script|Noto+Sans:700|Roboto|Work+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <script src="https://kit.fontawesome.com/5a01f232c4.js" crossorigin="anonymous"></script>
-    <script src="../static/js/profileApp.js" defer></script>
+    <script src="{{ static_prefix }}js/profileApp.js" defer></script>
+    <script>
+        $(document).ready(function () {
+            console.log('page loaded');
+            $.alert({
+                title: "Hey There!",
+                content: '<p>This section of the website is under construction yet.<br>' +
+                    ' The data displayed here is just dummy.<br>' +
+                    ' We would let you know when its ready.<br>' +
+                    'Stay Connected :)</p>',
+                theme: 'modern',
+
+            });
+        })
+    </script>
 </head>
 <body>
     <div class="profile-page-wrapper">
         <div class="profile-page-header">
             <div class="navbar-div-container">
-                <div class="icon-div icon-1">
+                <div class="icon-div icon-1" onclick="window.location.href = '{% url 'Uconnect_app:index' %}'">
                     <i class="fas fa-home"></i>
                 </div>
-                <div class="icon-div icon-2">
+                <div class="icon-div icon-2" onclick="window.location.href = '{% url 'Uconnect_app:index' %}#servicesPage'">
                     <i class="fas fa-hands-helping"></i>
                 </div>
-                <div class="icon-div icon-3">
+                <div class="icon-div icon-3" onclick="window.location.href = '{% url 'Uconnect_app:index' %}#blogsPage'">
                     <i class="fas fa-pencil-alt"></i>
                 </div>
             </div>
             <div class="logo-div">
-                <img src="../static/images/favicon.png" alt="uconnect logo" class="logo-header-image">
+                <img src="{{ static_prefix }}images/logo.png" alt="uconnect logo" style="width: 140px" class="logo-header-image">
             </div>
             <div class="search-pic-div">
                 <div class="search-div">
@@ -34,7 +53,7 @@
                     <i class="fas fa-search"></i>
                 </div>
                 <div class="profile-pic-div">
-                    <img src="../static/images/profileAvatar.svg" alt="profile avatar" class="profile-avatar-header">
+                    <img src="{{ static_prefix }}images/log-out-icon.png" alt="logout icon" class="logout-icon-header" title="Logout" onclick="window.location.href = '{% url 'account_logout' %}'">
                 </div>
             </div>
         </div>
@@ -42,17 +61,21 @@
             <div class="profile-area-container">
                 <div class="profile-picture-div">
                     <div class="profile-picture-preview-div">
-                        <img src="../static/images/profileAvatar.png" alt="profile-picture" class="profile-picture">
+                        <img src="{{ static_prefix }}images/profileAvatar.png" alt="profile-picture" class="profile-picture">
                         <div class="profile-hover-div">
                             <i class="fas fa-camera"></i>
                         </div>
                     </div>
                 </div>
                 <div class="profile-name-div">
-                    Hamza Abbas
+                    {% if request.user.get_full_name %}
+                        {{ request.user.get_full_name|title }}
+                    {% else %}
+                        {{ request.user.username|title }}
+                    {% endif %}
                 </div>
                 <div class="profile-username-div">
-                    @hamzaimranist
+                    @{{ request.user.username|lower }}
                 </div>
                 <div class="profile-adress-email-div">
                     <div class="profile-adress-div">
@@ -60,7 +83,7 @@
                             <i class="fas fa-map-marker-alt"></i> From
                         </div>
                         <div class="adress-details-div">
-                            Islamabad, Pakistan
+                            { Location }
                         </div>
                     </div>
                     <div class="profile-email-div">
@@ -69,7 +92,11 @@
                                 <i class="fas fa-envelope"></i> Email
                             </div>
                             <div class="email-details-div">
-                                imranist@teamalif.com
+                                {% if request.user.email %}
+                                    {{ request.user.email }}
+                                {% else %}
+                                    email@gmail.com
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -79,7 +106,7 @@
                         <p class="description-heading">Description</p> <p class="description-edit">Edit Description</p>
                     </div>
                     <div class="description-details">
-                        My name is hamza abbas and i live in taxila. I am a graduate in software engineering and i love pakistan. I like to work in every field of technology because it is changing the world.
+                        My name is {{ request.user.first_name|lower }} {{ request.user.last_name|lower }} and i live in taxila. I am a graduate in software engineering and i love pakistan. I like to work in every field of technology because it is changing the world.
                     </div>
                 </div>
                 <div class="profile-education-div">
@@ -98,7 +125,7 @@
                 <div class="profile-social-links-div">
                     <div class="github-link-div">
                         <div class="social-link-icon">
-                            <img src="../static/images/github.svg" alt="" class="social-image-1">
+                            <img src="{{ static_prefix }}images/github.svg" alt="" class="social-image-1">
                         </div>
                         <div class="social-link">
                             github.com/
@@ -106,7 +133,7 @@
                     </div>
                     <div class="facebook-link-div">
                         <div class="social-link-icon">
-                            <img src="../static/images/facebook.svg" alt="" class="social-image-2">
+                            <img src="{{ static_prefix }}images/facebook.svg" alt="" class="social-image-2">
                         </div>
                         <div class="social-link">
                             facebook.com/
@@ -114,7 +141,7 @@
                     </div>
                     <div class="linkedin-link-div">
                         <div class="social-link-icon">
-                            <img src="../static/images/linkedin.svg" alt="" class="social-image-3">
+                            <img src="{{ static_prefix }}images/linkedin.svg" alt="" class="social-image-3">
                         </div>
                         <div class="social-link">
                             linkedin.com/

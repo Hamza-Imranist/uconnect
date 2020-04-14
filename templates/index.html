@@ -1,4 +1,6 @@
 {% load staticfiles %}
+{% load socialaccount %}
+{% providers_media_js %}
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -12,154 +14,181 @@
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Ma+Shan+Zheng|Marck+Script|Noto+Sans:700|Roboto|Work+Sans&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5a01f232c4.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-</head>
-<!--
-<script type="text/javascript">
+    <script>
         $(document).ready(function () {
-            console.log("page loadded");
+                    console.log("page loadded");
 
-            // {#/////////////      AJAX LOGIN FORM      //////////////////////#}
+                    // {#/////////////      AJAX LOGIN FORM      //////////////////////#}
 
-            let $login_validation = $('#login-validation-output');
-            $login_validation.css('color', 'red');
+                    let $login_validation = $('#login-validation-output');
+                    $login_validation.css('color', 'red');
 
-            let $LoginForm = $('#login_form');
+                    let $LoginForm = $('#login_form');
 
-            $LoginForm.submit(function (event) {
-                event.preventDefault();
-                console.log("inside login");
-
-                // {#    AJAX validating the entered credentials  #}
-                $.ajax({
-                    type: "POST",
-                    data: {
-                        username: $('#login-email-username-input').val(),
-                        password: $('#login-password-input').val(),
-                        csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").attr('value'),
-                        submit: 'login',
-                    },
-                    url:"{}",
-                    dataType: 'json',
-                    success: function (data) {
-                        if(data.is_valid){
-                            window.location.href = '{}'
-                        }
-                        else{
-                            {#$('.invalid').html("Invalid username/password!");#}
-                            $login_validation.html("username/password is incorrect");
-                            $('.password').val('')
-                        }
-                    },
-                    error: function (errorThrown) {
-                        console.log(errorThrown)
-                    },
-                    });
-
-                    });
-
-                    // {# Hides the .invalid field when password filed is clicked #}
-                    $('#login-password-input').click(function () {
-                        $login_validation.html('');
-                     });
+                    $LoginForm.submit(function (event) {
+                        event.preventDefault();
+                        let loginSubmitButton = $('#login-submit-button');
+                        buttonSpinner(loginSubmitButton);
+                        console.log("inside login");
+                        var temp = {'X-CSRFToken': $("input[name='csrfmiddlewaretoken']").val()};
+                        // {#    AJAX validating the entered credentials  #}
+                        $.ajax({
+                            type: "POST",
+                            data: {
+                                login: $('#login-email-username-input').val(),
+                                password: $('#login-password-input').val(),
+                                csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
+                            },
+                            url:"{% url 'account_login' %}",
+                            headers: temp,
+                            dataType: 'text',
+                            success: function (data) {
+                                var jsonData = $.parseJSON(data);
+                                window.location.href = jsonData.location.toString();
+                               //     {#$('.invalid').html("<I></I>nvalid username/password!");#}
 
 
+                            },
+                            error: function (errorThrown) {
+                                console.log(errorThrown);
+                                 stopSpinner(loginSubmitButton, 'Login');
+                                    $login_validation.html("Invalid credentials!");
+                                    $('.password').val('')
+                            },
+                            });
+
+                            });
+
+                            // {# Hides the .invalid field when password filed is clicked #}
+                            $('#login-password-input').click(function () {
+                                $login_validation.html('');
+                             });
 
 
-                // {#  ///////////////////      username validate AJAX       /////////////////   #}
 
-                $('input#signup-username-input').keyup(function () {
 
-                    console.log("in username field")
-                    let validation_output = $('p.signup-username-validation-output');
-                    validation_output.html('');
-                    let $username = $(this).val();
-                    console.log($username);
+                        // {#  ///////////////////      username validate AJAX       /////////////////   #}
 
-                    let form = $(this).closest('form');
-                    if ($username !== '' ){                          //only triggered if username field is not empty
-                    $.ajax({
+                        $('input#signup-username-input').keyup(function () {
 
-                        url: '{}',
-                        data: form.serialize(),
-                        dataType: 'json',
-                        success: function (data) {
-                            if(data.is_taken){
-                                validation_output.html($username + ' is Taken');
-                                validation_output.css('color', 'red');
-                                {#$('#signup-submit-button').attr('disabled', true);#}      //disables click function
-                                $('button#signup-submit-button').hide();
+                            console.log("in username field");
+                            let validation_output = $('p.signup-username-validation-output');
+                            console.log('validation_output', validation_output.html());
+                            validation_output.html('');
+                            let $username = $(this).val();
+                            console.log($username);
+
+                            let form = $(this).closest('form');
+                            if ($username !== '' ){                          //only triggered if username field is not empty
+                            $.ajax({
+
+                                url: "{% url 'Uconnect_app:validate_username' %}",
+                                data: form.serialize(),
+                                dataType: 'json',
+                                success: function (data) {
+                                    if(data.is_taken){
+                                        validation_output.html($username + ' is Taken');
+                                        validation_output.css('color', 'red');
+                                        console.log('validation_output', validation_output.html());
+                                        //{#$('#signup-submit-button').attr('disabled', true);#}      //disables click function
+                                        $('button#signup-submit-button').hide();
+                                    }
+                                    else{
+                                        validation_output.html($username + ' is Available');
+                                        validation_output.css('color', 'green');
+                                       // {#$('#signup-submit-button').attr('disabled', false);#}
+                                        $('#signup-submit-button').show();
+                                    }
+                                },
+                                });
                             }
-                            else{
-                                validation_output.html($username + ' is Available');
-                                validation_output.css('color', 'green');
-                                {#$('#signup-submit-button').attr('disabled', false);#}
-                                $('#signup-submit-button').show();
-                            }
-                        },
+
+                        });
+
+                        // ///////////////// Signup submit Button Loading Animation  ////////////////////
+
+                    // to make the button show spinner while loading login/signup
+                    function buttonSpinner(button) {
+                        button.click(function () {
+                            $(this).html("<i class='fa fa-spin fa-spinner'></i>");
+                            $(this).attr('disabled', true);
                         });
                     }
 
-                });
 
-                // {#///////////////////////////   SIGNUP FORM     /////////////////#}
+                    // To stop the spinner in case of login/signup is unsuccessful
+                    function stopSpinner(button, text) {
+                        button.html(text);
+                        button.attr('disabled', false);
+                    }
 
-                let signup_form = $('form#user-form');
-                signup_form.submit(function (e) {
-                    e.preventDefault();
-                    let form_data = signup_form.serialize();
-                    form_data += '&submit=signup';               //To make it go to the 'signup' part of index view, (please look at the index view)
-                    console.log(form_data);
-                    let username_error_field = $('p.signup-username-validation-output').html('');
-                    let email_error_field = $('p.signup-email-error').html('');
-                    let password_error_field = $('p.signup-password-error').html('');
-                    let confirm_password_error_field = $('p.signup-confirm-password-error').html('');
+                        // {#///////////////////////////   SIGNUP FORM     /////////////////#}
+
+                        let signup_form = $('form#user-form');
+                        signup_form.submit(function (e) {
+                            e.preventDefault();
+                            let signup_form_button = $('#signup-submit-button');
+                            console.log(signup_form_button.html());
+                            //start the spinner
+                            buttonSpinner(signup_form_button);
+
+                            let form_data = signup_form.serialize();
+                            form_data += '&submit=signup';               //To make it go to the 'signup' part of index view, (please look at the index view)
+                            console.log(form_data);
+                            let username_error_field = $('p.signup-username-validation-output').html('');
+                            let email_error_field = $('p.signup-email-error').html('');
+                            let password_error_field = $('p.signup-password-error').html('');
+                            let confirm_password_error_field = $('p.signup-confirm-password-error').html('');
 
 
-                    $.ajax({
-                        type: 'POST',
-                        url: '{}' ,
-                        dataType: 'json',
-                        data: form_data,
-                        success: function (json) {
-                            if (json.user_created){
-                                window.location.href = '{}';
-                                    console.log("Signup succeeded")
-                            }
-                            else{
+                            $.ajax({
+                                type: 'POST',
+                                url: "{% url 'Uconnect_app:index' %}" ,
+                                dataType: 'json',
+                                data: form_data,
+                                success: function (json) {
+                                    if (json.user_created){
+                                        window.location.href = "{% url 'account_login' %}";
+                                            console.log("Signup succeeded")
+                                    }
+                                    else{
+                                        //although the below logic is noway an efficient one, but nothing else was working for now
+                                        //u may change it with Angular8 later
 
-                                //although the below logic is noway an efficient one, but nothing else was working for now
-                                //u may change it with Angular8 later
-
-                                if (json.errors.username){
-                                    for(let i=0; i< json.errors.username.length; i++){
-                                    username_error_field.html(json.errors.username[i])
+                                        //stop the spinner
+                                        stopSpinner(signup_form_button, 'Signup');
+                                        if (json.errors.username){
+                                            for(let i=0; i< json.errors.username.length; i++){
+                                            username_error_field.append(json.errors.username[i])
+                                            }
+                                        }
+                                        if (json.errors.email){
+                                            for(let i=0; i< json.errors.email.length; i++){
+                                            email_error_field.append(json.errors.email[i])
+                                            }
+                                        }
+                                        if (json.errors.password){
+                                            for(let i=0; i< json.errors.password.length; i++){
+                                            password_error_field.append(json.errors.password[i])
+                                            }
+                                        }
+                                        if (json.errors.confirm_password){
+                                            for(let i=0; i< json.errors.confirm_password.length; i++){
+                                            confirm_password_error_field.append(json.errors.confirm_password[i])
+                                            }
+                                        }
                                     }
                                 }
-                                if (json.errors.email){
-                                    for(let i=0; i< json.errors.email.length; i++){
-                                    email_error_field.html(json.errors.email[i])
-                                    }
-                                }
-                                if (json.errors.password){
-                                    for(let i=0; i< json.errors.password.length; i++){
-                                    password_error_field.html(json.errors.password[i])
-                                    }
-                                }
-                                if (json.errors.confirm_password){
-                                    for(let i=0; i< json.errors.confirm_password.length; i++){
-                                    confirm_password_error_field.html(json.errors.confirm_password[i])
-                                    }
-                                }
-                            }
-                        }
-                    })
+                            })
 
-                });
+                        });
 
-                });
-
+});
 </script>
--->
+
+
+
+</head>
 
 <body>
 
@@ -187,7 +216,7 @@
             <!--      DIV FOR NAV BAR      -->
                     <div class="nav-div">
 
-                        <div class="navs services-button"><a href="#servicesPage/slide2" class="services-menu-text">Services</a> <i class="fas fa-caret-down"></i>
+                        <div class="navs services-button"><a href="#servicesPage" class="services-menu-text">Services</a> <i class="fas fa-caret-down"></i>
                             
                         <!--      DROPDOWN DIV      -->
 
@@ -204,12 +233,17 @@
                             </div>
 
                         </div>
-
+                        {% if request.user.is_authenticated %}
+                        <div class="navs blogs-nav"><a href="#blogsPage">Blogs</a></div>
+                        <div class="navs about-nav"><a href="#aboutPage">About Us</a></div>
+                        <div class="navs login-button" onclick="window.location.href = '{% url 'account_logout' %}'">Logout</div>
+                        <div onclick="window.location.href = '{% url 'Uconnect_app:user_profile' %}'"><img style="height: 45px; width: 70px; cursor: pointer" alt="Profile Avatar" src="{% static 'images/profileAvatar.svg' %}"></div>
+                        {% else %}
                         <div class="navs blogs-nav"><a href="#blogsPage">Blogs</a></div>
                         <div class="navs about-nav"><a href="#aboutPage">About Us</a></div>
                         <div class="navs login-button" id="login-page-display-button">Login</div>
                         <div class="navs signup-button" id="signup-page-display-button">Sign up</div>
-
+                        {% endif %}
                     </div>
 
                 </div>
@@ -300,12 +334,22 @@
             <!--      LOGIN FORM PAGE STARTS HERE     -->
                 
                 <div class="login-form-page">
-                    <form id="login_form" action="{% url 'Uconnect_app:index' %}" method="post"></form>
+                    <form id="login_form" action="{% url 'Uconnect_app:index' %}" method="post">
+                        {% csrf_token %}
                     <div class="login-heading-div">
                        <div class="login-heading">
                            LOGIN
                        </div>
                     </div>
+                     <div style="text-align: left">
+                        <br>
+                     </div>
+                     <div style="align-content: center; justify-content: center; margin-left: 40%">
+                        <div class="facebook-icon-signup">
+                            <a class="facebook-icon-signup" href="{% provider_login_url "facebook" method="js_sdk" %}"><i class="fab fa-facebook-f"></i></a>
+                            <a class="google-icon-signup" href="{% provider_login_url "google" process='login' %}"><i class="fab fa-google"></i></a>
+                        </div>
+                     </div>
 
                     <div class="login-inputs-div-container">
 
@@ -314,7 +358,7 @@
                                <label for="login-email-username-input">Username or email:</label>
                            </div>
                            <div class="login-username-input">
-                               <input type="text" id="login-email-username-input" placeholder="email/username">
+                               <input type="text" id="login-email-username-input" placeholder="email/username" required>
                            </div>
                         </div>
 
@@ -323,32 +367,34 @@
                                <label for="login-password-input">Password:</label>
                            </div>
                            <div class="login-password-input">
-                               <input type="password" id="login-password-input" placeholder="password">
+                               <input type="password" id="login-password-input" placeholder="password" required>
                                <span toggle="#login-password-input" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                            </div>
                         </div>
-                        <div>
-                            <p id="login-validation-output"></p>
-                        </div>
+                        <br>
+
                         <div class="login-forgot-div-container">
                             <div class="login-forgot-div">
-                                Forgot your password?
+                                <br>Forgot your password?
                             </div>
                         </div>
+                        <div id="login-validation-output">
 
+                        </div>
                     </div>
 
                     <div class="login-button-div">
 
                        <div class="dont-have-div">
-                           Do not have any account.
+                           Do not have any account?
                        </div>
 
                        <div class="login-submit-button-div">
-                           <button id="login-submit-button" type="submit" onclick="return alert('This site is under construction at the moment...!')">LOGIN</button>
+                           <button id="login-submit-button" type="submit">LOGIN</button>
                        </div>
 
                     </div>
+                    </form>
                 </div>
 
 
@@ -362,27 +408,27 @@
 
                    <div class="signup-heading-facebook">
                        <div class="facebook-icon-signup">
-                        <i class="fab fa-facebook-f"></i>
+                           <a class="facebook-icon-signup" href="{% provider_login_url "facebook" method="js_sdk" %}"><i class="fab fa-facebook-f"></i></a>
                        </div>
                        <div class="facebook-email-signup">
-                            Signup with facebook
+                           <a class="facebook-email-signup" href="{% provider_login_url "facebook" method="js_sdk" %}">Signup with facebook</a>
                        </div>
                    </div>
 
                    <div class="signup-heading-google">
                        <div class="google-icon-signup">
-                        <i class="fab fa-google-plus-g"></i>
+                           <a class="google-icon-signup" href="{% provider_login_url "google" %}"><i class="fab fa-google"></i></a>
                        </div>
                        <div class="google-email-signup">
-                        Signup with google
+                            <a class="google-email-signup" href="{% provider_login_url "google" %}">Signup with google</a>
                        </div>
                     </div>
 
                 </div>
 
 
-{#                <form id="user-form" action="{% url 'Uconnect_app:index' %}" method="post">#}
-{#                {% csrf_token %}#}
+                <form id="user-form" action="{% url 'Uconnect_app:index' %}" method="post">
+                {% csrf_token %}
                 <div class="signup-inputs-div-container">
 
                    <div class="signup-username-div">
@@ -390,7 +436,7 @@
                            <label for="signup-username-input"></label>
                        </div>
                        <div class="signup-username-input">
-                           <input type="text" id="signup-username-input" placeholder="username" name="{{ form.username.html_name }}" value="{{ form.username.value|default:'' }}">
+                           <input type="text" id="signup-username-input" placeholder="username" name="{{ form.username.html_name }}" value="{{ form.username.value|default:'' }}" required>
 {#                            Username validation result field         #}
                            <p class="signup-username-validation-output"></p>
                        </div>
@@ -401,7 +447,7 @@
                             <label for="signup-email-input"></label>
                         </div>
                         <div class="signup-username-input">
-                            <input type="text" id="signup-email-input" placeholder="email" name="{{ form.email.html_name }}" value="{{ form.email.value|default:'' }}">
+                            <input type="text" id="signup-email-input" placeholder="email" name="{{ form.email.html_name }}" value="{{ form.email.value|default:'' }}" required>
                             <p class="signup-email-error"></p>
                         </div>
                      </div>
@@ -411,7 +457,7 @@
                            <label for="signup-password-input"></label>
                        </div>
                        <div class="signup-password-input">
-                           <input type="password" id="signup-password-input" placeholder="password" name="{{ form.password.html_name }}" value="{{ form.password.value|default:'' }}">
+                           <input type="password" id="signup-password-input" placeholder="password" name="{{ form.password.html_name }}" value="{{ form.password.value|default:'' }}" required>
                            <span toggle="#signup-password-input" class="fa fa-fw fa-eye field-icon-1 toggle-password-1"></span>
                             <p class="signup-password-error"></p>
                        </div>
@@ -422,7 +468,7 @@
                             <label for="signup-confirm-password-input"></label>
                         </div>
                         <div class="signup-password-input">
-                            <input type="password" id="signup-confirm-password-input" placeholder="confirm password" name="{{ form.confirm_password.html_name }}" value="{{ form.confirm_password.value|default:'' }}">
+                            <input type="password" id="signup-confirm-password-input" placeholder="confirm password" name="{{ form.confirm_password.html_name }}" value="{{ form.confirm_password.value|default:'' }}" required>
                             <span toggle="#signup-confirm-password-input" class="fa fa-fw fa-eye field-icon-2 toggle-password-2"></span>
                             <p class="signup-confirm-password-error"></p>
                         </div>
@@ -435,10 +481,11 @@
                        Already have an account?
                    </div>
                    <div class="signup-submit-button-div">
-                       <button type="submit" id="signup-submit-button" name="submit" value="signup" onclick="return alert('This site is under construction at the moment')">Signup</button>
+                       <button type="submit" id="signup-submit-button" name="submit" value="signup" >Signup</button>
                    </div>
                 </div>
                     </div>
+                </form>
             </div>
             
             <!--      BACK PAGE STARTS HERE     -->
@@ -1226,7 +1273,6 @@
 
     <script src="{% static 'js/fullPage.js-master/src/fullpage.js' %}"></script>
     <script src="{% static 'js/app.js' %}"></script>
-
 
 </body>
 </html>

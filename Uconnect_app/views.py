@@ -1,16 +1,19 @@
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from pathlib import Path
+from Uconnect import settings
+from email.mime.image import MIMEImage
+from django.core.mail import EmailMultiAlternatives
 from .forms import SignupForm
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from pathlib import Path
-from Uconnect import settings
-from email.mime.image import MIMEImage
-from django.core.mail import EmailMultiAlternatives, EmailMessage
+from allauth.account.signals import email_confirmed
+from django.dispatch import receiver
+
 
 # Create your views here.
 
@@ -26,7 +29,7 @@ def index(request):
             if form.is_valid():
                 user = form.save()
                 user.set_password(user.password)
-                send_email(user)
+                # send_email(user)
                 user.save()
                 # return HttpResponseRedirect(reverse("Uconnect_app:index"))
                 return JsonResponse({'user_created': True})
@@ -86,8 +89,15 @@ def user_logout(request):
 
 @login_required
 def user_profile_view(request):
+    """
+        View for profile of a user, which is to be rendered when a user logs in to the system successfully,
+         to be developed yet.
+
+         Dummy Profile
+    """
+
     context_dict = {}
-    response = render(request, 'user_profile.html', context_dict)
+    response = render(request, 'profile.html', context_dict)
     return response
 
 
@@ -105,6 +115,27 @@ def validate_username(request):
         # print("is taken")
         data['message'] = 'user already exists!'
     return JsonResponse(data)
+
+
+def mb_signup(request):
+    context_dict = {'blog': '#blogsPage', }
+    response = render(request, 'signupForm.html', context_dict)
+    return response
+
+
+def mb_login(request):
+    context_dict = {}
+    response = render(request, 'loginForm.html', context_dict)
+    return response
+
+
+def test_template(request):
+    """
+    Just a view to test templates in development
+    :param request:
+    :return:
+    """
+    return render(request, 'signupForm.html')
 
 
 def send_email(form):
@@ -139,13 +170,7 @@ def send_email(form):
     msg.send()
 
 
-def mb_signup(request):
-    context_dict = {'blog': '#blogsPage', }
-    response = render(request, 'signupForm.html', context_dict)
-    return response
-
-
-def mb_login(request):
-    context_dict = {}
-    response = render(request, 'loginForm.html', context_dict)
-    return response
+@receiver(email_confirmed)
+def send_mail_func(request, email_address, **kwargs):
+    user = User.objects.get(email=email_address.email)
+    send_email(user)

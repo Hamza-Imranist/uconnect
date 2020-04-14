@@ -120,10 +120,17 @@ body {
     align-items: center;
 }
 .profile-avatar-header {
-    width: 5vw;
-    height: 7vh;
+    width: 4vw;
+    height: 6vh;
 }
 .profile-avatar-header:hover {
+    cursor: pointer;
+}
+.logout-icon-header {
+    width: 3vw;
+    height: 5vh;
+}
+.logout-icon-header:hover {
     cursor: pointer;
 }
 .content-area-container {
