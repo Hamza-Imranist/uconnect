@@ -24,7 +24,8 @@
 </head>
 <body>
     <script>
-       function toggleType() {
+        $(document).ready(function () {
+        function toggleType() {
           var x = document.getElementById("login-password-input");
             if (x.type === "password") {
                 x.type = "text";
@@ -32,6 +33,29 @@
                 x.type = "password";
             }
        }
+         let spinnerIcon = "<i class='fa fa-spin fa-spinner'></i>";
+
+                        // to make the button show spinner while loading login/signup
+                    function buttonSpinner(button) {
+                            button.html(spinnerIcon);
+                            button.attr('disabled', true);
+                    }
+
+
+                    // To stop the spinner in case of login/signup is unsuccessful
+                    function stopSpinner(button, text) {
+                        button.html(text);
+                        button.attr('disabled', false);
+                    }
+
+            let loginForm = $('#js-login-form')
+            loginForm.submit(function () {
+                let loginButton = $('#login-submit-button');
+                buttonSpinner(loginButton);
+            })
+
+        });
+
     </script>
 
     <div class="profile-page-wrapper">
@@ -79,7 +103,7 @@
                 </div>
         </div>
 
-        <form method="post" action="{% url 'account_login' %}">
+        <form id="js-login-form" method="post" action="{% url 'account_login' %}">
         {% csrf_token %}
             <div class="login-inputs-div-container">
 
