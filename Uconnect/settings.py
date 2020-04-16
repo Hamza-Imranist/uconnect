@@ -20,7 +20,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 # X_FRAME_OPTIONS = 'DENY'
 
 import os
-from django.urls import reverse
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,6 +41,7 @@ ALLOWED_HOSTS = [
     'uconnect.teamalif.com',
     '127.0.0.1',
     'localhost',
+    '172.105.43.76',
 ]
 
 
@@ -193,6 +193,6 @@ LOGIN_REDIRECT_URL = '/accounts/profile/'
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http"
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
