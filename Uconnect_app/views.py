@@ -12,6 +12,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from allauth.account.signals import email_confirmed
+from allauth.account.signals import user_signed_up
+from allauth.socialaccount.models import SocialAccount
 from django.dispatch import receiver
 
 
@@ -174,3 +176,14 @@ def send_email(form):
 def send_mail_func(request, email_address, **kwargs):
     user = User.objects.get(email=email_address.email)
     send_email(user)
+
+
+@receiver(user_signed_up)
+def google_signup(request, user, **kwargs):
+    user_data = SocialAccount.objects.filter(user=user, provider='google')
+    if user_data:
+        try:
+            send_email(user)
+        except Exception as e:
+            print("send_email() function gives exception: ", e)
+            pass

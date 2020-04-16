@@ -181,12 +181,15 @@ LOGIN_URL = '/accounts/login/'
 
 # EMAIL SETTINGS
 
+#EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+#SENDGRID_API_KEY = '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'
+#SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
+EMAIL_USE_SSL = True
+EMAIL_PORT = 465
 EMAIL_HOST_USER = 'uconnect786@gmail.com'
-EMAIL_HOST_PASSWORD = 'Uconnect@123'
+EMAIL_HOST_PASSWORD = 'vjakczrydvamewbe'
 
 
 LOGIN_REDIRECT_URL = '/accounts/profile/'

@@ -238,7 +238,7 @@
                         <div class="navs blogs-nav"><a href="#blogsPage">Blogs</a></div>
                         <div class="navs about-nav"><a href="#aboutPage">About Us</a></div>
                         <div class="navs login-button" onclick="window.location.href = '{% url 'account_logout' %}'">Logout</div>
-                        <div onclick="window.location.href = '{% url 'Uconnect_app:user_profile' %}'"><img style="height: 45px; width: 70px; cursor: pointer" alt="Profile Avatar" src="{% static 'images/profileAvatar.svg' %}"></div>
+                        <div onclick="window.location.href = '{% url 'Uconnect_app:user_profile' %}'"><img style="height: 45px; width: 70px; cursor: pointer" alt="Profile Avatar" title='{{ request.user.username|title }}'  src="{% static 'images/profileAvatar.svg' %}"></div>
                         {% else %}
                         <div class="navs blogs-nav"><a href="#blogsPage">Blogs</a></div>
                         <div class="navs about-nav"><a href="#aboutPage">About Us</a></div>
