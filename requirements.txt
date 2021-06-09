@@ -11,7 +11,7 @@ Click==7.0
 coverage==5.1
 cymem==2.0.3
 defusedxml==0.6.0
-Django==2.2.5
+Django==2.2.22
 django-allauth==0.41.0
 django-crispy-forms==1.8.1
 django-sendgrid-v5==0.8.1
